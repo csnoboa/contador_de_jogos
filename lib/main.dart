@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:contador_de_jogos/start_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +14,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      routes: {
+        '/': (context) => MyHomePage(),
+        '/start': (context) => StartPage(),
+      },
+      initialRoute: '/',
     );
   }
 }
@@ -44,11 +49,15 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ClipOval(
               child: Container(
-                color: Colors.redAccent,
                 width: 250,
                 height: 250,
                 child: RaisedButton(
-                  onPressed: null,
+                  color: Colors.redAccent,
+                  onPressed: () {
+                    setState(() {
+                      Navigator.of(context).pushNamed('/start');
+                    });
+                  },
                   child: Text('COMEÇAR',
                       style: TextStyle(
                         fontSize: 40,
@@ -59,11 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(height: 50),
             Container(
-              color: Colors.yellowAccent,
               width: 150,
               height: 50,
               child: RaisedButton(
-                onPressed: null,
+                color: Colors.yellowAccent,
+                onPressed: () {
+                  setState(() {});
+                },
                 child: Text(
                   'MENU',
                   style: TextStyle(fontSize: 20, color: Colors.black),
@@ -72,11 +83,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(height: 10),
             Container(
-              color: Colors.yellowAccent,
               width: 150,
               height: 50,
               child: RaisedButton(
-                onPressed: null,
+                color: Colors.yellowAccent,
+                onPressed: () {
+                  setState(() {});
+                },
                 child: Text(
                   'OPÇÕES',
                   style: TextStyle(fontSize: 20, color: Colors.black),
