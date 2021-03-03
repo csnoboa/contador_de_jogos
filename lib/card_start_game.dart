@@ -40,7 +40,7 @@ class _CardStartGameState extends State<CardStartGame> {
           Container(width: 10),
           Text(
             nameEquipe,
-            style: TextStyle(fontSize: 24),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           Container(width: 30),
           IconButton(
@@ -54,7 +54,10 @@ class _CardStartGameState extends State<CardStartGame> {
           Container(width: 10),
           Text(
             '$_count',
-            style: TextStyle(fontSize: 24),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Container(width: 10),
           IconButton(
