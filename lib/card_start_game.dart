@@ -33,41 +33,46 @@ class _CardStartGameState extends State<CardStartGame> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
         children: [
-          Container(width: 50, height: 50, color: colorEquipe),
-          Container(width: 10),
-          Text(
-            nameEquipe,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(width: 50, height: 50, color: colorEquipe),
+              Container(width: 10),
+              Text(
+                nameEquipe,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              Container(width: 30),
+              IconButton(
+                icon: Icon(Icons.remove_circle_outline),
+                onPressed: () {
+                  setState(() {
+                    decreaseCount();
+                  });
+                },
+              ),
+              Container(width: 10),
+              Text(
+                '$_count',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Container(width: 10),
+              IconButton(
+                icon: Icon(Icons.add_circle_outline),
+                onPressed: () {
+                  setState(() {
+                    increaseCount();
+                  });
+                },
+              ),
+            ],
           ),
-          Container(width: 30),
-          IconButton(
-            icon: Icon(Icons.remove_circle_outline),
-            onPressed: () {
-              setState(() {
-                decreaseCount();
-              });
-            },
-          ),
-          Container(width: 10),
-          Text(
-            '$_count',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Container(width: 10),
-          IconButton(
-            icon: Icon(Icons.add_circle_outline),
-            onPressed: () {
-              setState(() {
-                increaseCount();
-              });
-            },
-          ),
+          Container(height: 25),
         ],
       ),
     );
