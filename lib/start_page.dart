@@ -147,7 +147,7 @@ class _StartPageState extends State<StartPage> {
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(
-                left: 15.0, right: 15, top: 30, bottom: 30),
+                left: 10.0, right: 10, top: 30, bottom: 30),
             child: Container(
               constraints: BoxConstraints(
                 minHeight: MediaQuery.of(context).size.height * 0.78,

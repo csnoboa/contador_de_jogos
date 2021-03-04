@@ -8,7 +8,10 @@ class AppController extends ChangeNotifier {
 
   int time = 60;
 
-  List<EquipeCard> listEquipeCard = List.empty(growable: true);
+  List<EquipeCard> listEquipeCard = [
+    EquipeCard(name: "AZUL", color: Colors.blue),
+    EquipeCard(name: "AMARELO", color: Colors.yellow)
+  ];
 
   changeTime(int newTime) {
     time = newTime;

@@ -42,14 +42,13 @@ class _CardStartGameState extends State<CardStartGame> {
               Container(width: 10),
               Container(
                 constraints: BoxConstraints(
-                  minWidth: MediaQuery.of(context).size.width * 0.35,
+                  minWidth: MediaQuery.of(context).size.width * 0.3,
                 ),
                 child: Text(
                   nameEquipe,
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ),
-              Container(width: 30),
               IconButton(
                 icon: Icon(Icons.remove_circle_outline),
                 onPressed: () {
@@ -58,7 +57,7 @@ class _CardStartGameState extends State<CardStartGame> {
                   });
                 },
               ),
-              Container(width: 10),
+              Container(width: 5),
               Text(
                 '$_count',
                 style: TextStyle(
@@ -66,7 +65,7 @@ class _CardStartGameState extends State<CardStartGame> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(width: 10),
+              Container(width: 5),
               IconButton(
                 icon: Icon(Icons.add_circle_outline),
                 onPressed: () {
