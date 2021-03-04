@@ -1,3 +1,4 @@
+import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:contador_de_jogos/card_start_game.dart';
 import 'dart:async';
@@ -6,7 +7,7 @@ import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 class StartPage extends StatefulWidget {
   StartPage({Key key}) : super(key: key);
 
-  final int time = 5;
+  final int time = AppController.instance.time;
 
   @override
   _StartPageState createState() => _StartPageState(time: this.time);
