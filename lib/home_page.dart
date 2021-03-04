@@ -1,5 +1,5 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
-import 'package:contador_de_jogos/controller/counter_storage.dart';
+import 'package:contador_de_jogos/storage/counter_storage.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {

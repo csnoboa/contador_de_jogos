@@ -128,6 +128,16 @@ class _StartPageState extends State<StartPage> {
 
     textTempo = "TEMPO: " + textTempo;
 
+    List<Widget> listWidgets = List.empty(growable: true);
+
+    for (int i = 0; i < AppController.instance.sizeListCard(); i++) {
+      listWidgets.add(
+        CardStartGame(
+          colorEquipe: AppController.instance.listEquipeCard[i].color,
+          nameEquipe: AppController.instance.listEquipeCard[i].name,
+        ),
+      );
+    }
     return Container(
       child: Scaffold(
         appBar: AppBar(
@@ -148,18 +158,7 @@ class _StartPageState extends State<StartPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CardStartGame(
-                      colorEquipe: Colors.blue,
-                      nameEquipe: 'AZUL',
-                    ),
-                    CardStartGame(
-                      colorEquipe: Colors.red,
-                      nameEquipe: 'VERM',
-                    ),
-                    CardStartGame(
-                      colorEquipe: Colors.yellow,
-                      nameEquipe: 'AMAR',
-                    ),
+                    Column(children: listWidgets),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(

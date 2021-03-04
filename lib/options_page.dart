@@ -1,4 +1,4 @@
-import 'package:contador_de_jogos/controller/counter_storage.dart';
+import 'package:contador_de_jogos/storage/counter_storage.dart';
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +16,15 @@ class _OptionsPageState extends State<OptionsPage> {
 
   @override
   Widget build(BuildContext context) {
+    AppController.instance.listEquipeCard.clear();
+    EquipeCard equipe = EquipeCard(name: "VERDE", color: Colors.green);
+    EquipeCard equipe2 = EquipeCard(name: "AZUL", color: Colors.blue);
+    EquipeCard equipe3 = EquipeCard(name: "AMAR", color: Colors.yellow);
+
+    AppController.instance.addEquipeCard(equipe);
+    AppController.instance.addEquipeCard(equipe2);
+    AppController.instance.addEquipeCard(equipe3);
+
     _stopwatchText = (_counter ~/ 60).toString() +
         ' m ' +
         (_counter % 60).toString().padLeft(2, '0') +
