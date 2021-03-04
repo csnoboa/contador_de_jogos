@@ -30,8 +30,14 @@ class _StartPageState extends State<StartPage> {
     }
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
-        if (_counter > 0) {
+        if (_counter > 1) {
           _counter--;
+        } else if (_counter == 1) {
+          _counter--;
+          _timer.cancel();
+          _running = false;
+          _pause = true;
+          FlutterRingtonePlayer.playAlarm();
         } else {
           _timer.cancel();
           _running = false;

@@ -1,3 +1,5 @@
+import 'package:contador_de_jogos/controller/app_controller.dart';
+import 'package:contador_de_jogos/controller/counter_storage.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -7,6 +9,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    CounterStorage().readCounter().then((int value) {
+      setState(() {
+        print(value);
+        AppController.instance.changeTime(value);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 50,
               child: RaisedButton(
                 color: Colors.yellowAccent,
-                onPressed: () {
-                  setState(() {});
-                },
+                onPressed: () {},
                 child: Text(
                   'MENU',
                   style: TextStyle(fontSize: 20, color: Colors.black),

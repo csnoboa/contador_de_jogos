@@ -1,3 +1,4 @@
+import 'package:contador_de_jogos/controller/counter_storage.dart';
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ class _OptionsPageState extends State<OptionsPage> {
     return WillPopScope(
       onWillPop: () async {
         AppController.instance.changeTime(_counter);
+        CounterStorage().writeCounter(_counter);
         return true;
       },
       child: Scaffold(
