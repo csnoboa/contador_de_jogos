@@ -40,9 +40,14 @@ class _CardStartGameState extends State<CardStartGame> {
             children: [
               Container(width: 50, height: 50, color: colorEquipe),
               Container(width: 10),
-              Text(
-                nameEquipe,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Container(
+                constraints: BoxConstraints(
+                  minWidth: MediaQuery.of(context).size.width * 0.35,
+                ),
+                child: Text(
+                  nameEquipe,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
               ),
               Container(width: 30),
               IconButton(

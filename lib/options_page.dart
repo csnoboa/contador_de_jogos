@@ -14,16 +14,79 @@ class _OptionsPageState extends State<OptionsPage> {
 
   String _stopwatchText;
 
+  List<String> listNames = [
+    "ROXO",
+    "ROSA",
+    "LARANJA",
+    "CINZA",
+    "MARROM",
+    "PRETO",
+    "AZUL",
+    "VERDE",
+    "AMARELO",
+    "VERMELHO"
+  ];
+  List<Color> listColors = [
+    Colors.purple,
+    Colors.pink,
+    Colors.orange,
+    Colors.grey,
+    Colors.brown,
+    Colors.black,
+    Colors.blue,
+    Colors.green,
+    Colors.yellow,
+    Colors.red
+  ];
+
   @override
   Widget build(BuildContext context) {
-    AppController.instance.listEquipeCard.clear();
-    EquipeCard equipe = EquipeCard(name: "VERDE", color: Colors.green);
-    EquipeCard equipe2 = EquipeCard(name: "AZUL", color: Colors.blue);
-    EquipeCard equipe3 = EquipeCard(name: "AMAR", color: Colors.yellow);
+    List<Widget> listAddedWidgets = List.empty(growable: true);
 
-    AppController.instance.addEquipeCard(equipe);
-    AppController.instance.addEquipeCard(equipe2);
-    AppController.instance.addEquipeCard(equipe3);
+    for (int i = 0; i < AppController.instance.sizeListCard(); i++) {
+      listNames.remove(AppController.instance.listEquipeCard[i].name);
+      listColors.remove(AppController.instance.listEquipeCard[i].color);
+
+      listAddedWidgets.add(
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 50,
+                height: 50,
+                color: AppController.instance.listEquipeCard[i].color,
+              ),
+              Container(width: 20),
+              Container(
+                constraints: BoxConstraints(
+                  minWidth: MediaQuery.of(context).size.width * 0.35,
+                ),
+                child: Text(
+                  AppController.instance.listEquipeCard[i].name,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    listNames
+                        .add(AppController.instance.listEquipeCard[i].name);
+                    listColors
+                        .add(AppController.instance.listEquipeCard[i].color);
+                    AppController.instance.removeEquipeCard(i);
+                  });
+                },
+                icon: Icon(
+                  Icons.remove_circle_outline,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
 
     _stopwatchText = (_counter ~/ 60).toString() +
         ' m ' +
@@ -40,75 +103,110 @@ class _OptionsPageState extends State<OptionsPage> {
           title: Text('OPÇÕES'),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ClipOval(
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    child: RaisedButton(
-                      child: Text('-10'),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Text("TEMPO: ",
+                    style:
+                        TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 15, bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ClipOval(
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        child: RaisedButton(
+                          child: Text('-10'),
+                          onPressed: () {
+                            setState(() {
+                              if (_counter < 10) {
+                                _counter = 0;
+                              } else {
+                                _counter -= 10;
+                              }
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Container(width: 5),
+                    IconButton(
+                      icon: Icon(Icons.remove_circle_outline),
                       onPressed: () {
                         setState(() {
-                          if (_counter < 10) {
-                            _counter = 0;
-                          } else {
-                            _counter -= 10;
+                          if (_counter > 0) {
+                            _counter--;
                           }
                         });
                       },
                     ),
-                  ),
-                ),
-                Container(width: 5),
-                IconButton(
-                  icon: Icon(Icons.remove_circle_outline),
-                  onPressed: () {
-                    setState(() {
-                      if (_counter > 0) {
-                        _counter--;
-                      }
-                    });
-                  },
-                ),
-                Container(width: 5),
-                Text(
-                  '$_stopwatchText',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(width: 5),
-                IconButton(
-                  icon: Icon(Icons.add_circle_outline),
-                  onPressed: () {
-                    setState(() {
-                      _counter++;
-                    });
-                  },
-                ),
-                Container(width: 5),
-                ClipOval(
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    child: RaisedButton(
-                      child: Text('+10'),
+                    Container(width: 5),
+                    Text(
+                      '$_stopwatchText',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Container(width: 5),
+                    IconButton(
+                      icon: Icon(Icons.add_circle_outline),
                       onPressed: () {
                         setState(() {
-                          _counter += 10;
+                          _counter++;
                         });
                       },
                     ),
-                  ),
+                    Container(width: 5),
+                    ClipOval(
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        child: RaisedButton(
+                          child: Text('+10'),
+                          onPressed: () {
+                            setState(() {
+                              _counter += 10;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            )
-          ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, bottom: 10),
+                child: Text(
+                  "EQUIPES:",
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Column(
+                children: listAddedWidgets,
+              ),
+              Visibility(
+                child: IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    setState(() {
+                      EquipeCard equipe = EquipeCard(
+                          name: listNames.removeLast(),
+                          color: listColors.removeLast());
+                      AppController.instance.addEquipeCard(equipe);
+                    });
+                  },
+                ),
+                visible: (listNames.isEmpty ? false : true),
+              ),
+            ],
+          ),
         ),
       ),
     );
