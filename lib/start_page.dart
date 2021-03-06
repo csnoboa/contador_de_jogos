@@ -37,12 +37,16 @@ class _StartPageState extends State<StartPage> {
           _timer.cancel();
           _running = false;
           _pause = true;
-          FlutterRingtonePlayer.playAlarm();
+          if (AppController.instance.isSoundOn) {
+            FlutterRingtonePlayer.playAlarm();
+          }
         } else {
           _timer.cancel();
           _running = false;
           _pause = true;
-          FlutterRingtonePlayer.playAlarm();
+          if (AppController.instance.isSoundOn) {
+            FlutterRingtonePlayer.playAlarm();
+          }
         }
         _setCounterText();
       });
@@ -152,7 +156,9 @@ class _StartPageState extends State<StartPage> {
               constraints: BoxConstraints(
                 minHeight: MediaQuery.of(context).size.height * 0.78,
               ),
-              color: Colors.amber[100],
+              color: AppController.instance.isDarkTheme
+                  ? Colors.grey[700]
+                  : Colors.amber[100],
               child: Padding(
                 padding: const EdgeInsets.only(top: 25.0, left: 15),
                 child: Column(
@@ -178,6 +184,7 @@ class _StartPageState extends State<StartPage> {
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -190,6 +197,7 @@ class _StartPageState extends State<StartPage> {
                                 ? Icons.pause_outlined
                                 : Icons.play_arrow_outlined,
                             size: 40,
+                            color: Colors.black,
                           ),
                           onPressed: _startStopButtonPressed,
                         ),
@@ -197,6 +205,7 @@ class _StartPageState extends State<StartPage> {
                           icon: Icon(
                             Icons.stop_outlined,
                             size: 40,
+                            color: Colors.black,
                           ),
                           onPressed: _resetButtonPressed,
                         ),

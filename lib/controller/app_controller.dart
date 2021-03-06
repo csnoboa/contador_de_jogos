@@ -8,6 +8,12 @@ class AppController extends ChangeNotifier {
 
   int time = 60;
 
+  bool isSoundOn = true;
+  changeSound() {
+    isSoundOn = !isSoundOn;
+    notifyListeners();
+  }
+
   List<EquipeCard> listEquipeCard = [
     EquipeCard(name: "AZUL", color: Colors.blue),
     EquipeCard(name: "AMARELO", color: Colors.yellow)

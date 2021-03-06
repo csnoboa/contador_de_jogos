@@ -46,11 +46,18 @@ class _CardStartGameState extends State<CardStartGame> {
                 ),
                 child: Text(
                   nameEquipe,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               IconButton(
-                icon: Icon(Icons.remove_circle_outline),
+                icon: Icon(
+                  Icons.remove_circle_outline,
+                  color: Colors.black,
+                ),
                 onPressed: () {
                   setState(() {
                     decreaseCount();
@@ -63,11 +70,15 @@ class _CardStartGameState extends State<CardStartGame> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
               Container(width: 5),
               IconButton(
-                icon: Icon(Icons.add_circle_outline),
+                icon: Icon(
+                  Icons.add_circle_outline,
+                  color: Colors.black,
+                ),
                 onPressed: () {
                   setState(() {
                     increaseCount();

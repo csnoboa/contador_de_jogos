@@ -62,7 +62,9 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 50,
               child: RaisedButton(
                 color: Colors.yellowAccent,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/menu');
+                },
                 child: Text(
                   'MENU',
                   style: TextStyle(fontSize: 20, color: Colors.black),
