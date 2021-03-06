@@ -14,6 +14,12 @@ class AppController extends ChangeNotifier {
     notifyListeners();
   }
 
+  String lang = "port";
+  changeLanguage(String _lang) {
+    lang = _lang;
+    notifyListeners();
+  }
+
   List<EquipeCard> listEquipeCard = [
     EquipeCard(name: "AZUL", color: Colors.blue),
     EquipeCard(name: "AMARELO", color: Colors.yellow)

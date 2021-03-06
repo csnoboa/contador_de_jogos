@@ -1,5 +1,6 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:contador_de_jogos/language/language.dart';
 
 class OptionsPage extends StatefulWidget {
   OptionsPage({Key key}) : super(key: key);
@@ -9,11 +10,14 @@ class OptionsPage extends StatefulWidget {
 }
 
 class _OptionsPageState extends State<OptionsPage> {
+  bool isPortuguese = true;
+
   @override
   Widget build(BuildContext context) {
+    isPortuguese = (AppController.instance.lang == "port") ? true : false;
     return Scaffold(
       appBar: AppBar(
-        title: Text("OPÇÕES"),
+        title: Text(titleOptionsPage[AppController.instance.lang]),
         centerTitle: true,
       ),
       body: Padding(
@@ -24,7 +28,7 @@ class _OptionsPageState extends State<OptionsPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'ALARME: ',
+                  switchAlarm[AppController.instance.lang],
                   style: TextStyle(fontSize: 20),
                 ),
                 Switch(
@@ -44,7 +48,7 @@ class _OptionsPageState extends State<OptionsPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'TEMA DARK: ',
+                  switchDarkTheme[AppController.instance.lang],
                   style: TextStyle(fontSize: 20),
                 ),
                 Switch(
@@ -56,6 +60,52 @@ class _OptionsPageState extends State<OptionsPage> {
                       },
                     );
                   },
+                ),
+              ],
+            ),
+            Container(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  textLanguage[AppController.instance.lang],
+                  style: TextStyle(fontSize: 20),
+                ),
+                Column(
+                  children: [
+                    Container(
+                      width: 220,
+                      child: CheckboxListTile(
+                        value: isPortuguese,
+                        onChanged: (value) {
+                          setState(() {
+                            isPortuguese = true;
+                            AppController.instance.changeLanguage('port');
+                          });
+                        },
+                        title: Text(
+                          "PORTUGUÊS",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 220,
+                      child: CheckboxListTile(
+                        value: !isPortuguese,
+                        onChanged: (value) {
+                          setState(() {
+                            isPortuguese = false;
+                            AppController.instance.changeLanguage('eng');
+                          });
+                        },
+                        title: Text(
+                          "ENGLISH",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

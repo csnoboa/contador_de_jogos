@@ -1,6 +1,7 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:contador_de_jogos/storage/counter_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:contador_de_jogos/language/language.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -28,7 +29,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: AppBar(
           title: Padding(
             padding: const EdgeInsets.only(top: 35.0),
-            child: Text('CONTADOR DE JOGOS', style: TextStyle(fontSize: 28)),
+            child: Text(titleHomeLang[AppController.instance.lang],
+                style: TextStyle(fontSize: 28)),
           ),
           centerTitle: true,
         ),
