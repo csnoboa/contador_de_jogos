@@ -1,4 +1,5 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
+import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
 import 'package:contador_de_jogos/card_start_game.dart';
 import 'dart:async';
@@ -100,37 +101,41 @@ class _StartPageState extends State<StartPage> {
         if (time ~/ 60 == 1) {
           if (time % 60 == 1) {
             textTempo = (time ~/ 60).toString() +
-                ' MINUTO E ' +
+                minuteAndStart[AppController.instance.lang] +
                 (time % 60).toString() +
-                ' SEGUNDO';
+                secondStart[AppController.instance.lang];
           } else {
             textTempo = (time ~/ 60).toString() +
-                ' MINUTO E ' +
+                minuteAndStart[AppController.instance.lang] +
                 (time % 60).toString() +
-                ' SEGUNDOS';
+                secondsStart[AppController.instance.lang];
           }
         } else {
           textTempo = (time ~/ 60).toString() +
-              ' MINUTOS E ' +
+              minutesAndStart[AppController.instance.lang] +
               (time % 60).toString() +
-              ' SEGUNDOS';
+              secondsStart[AppController.instance.lang];
         }
       } else {
         if (time ~/ 60 == 1) {
-          textTempo = (time ~/ 60).toString() + ' MINUTO';
+          textTempo = (time ~/ 60).toString() +
+              minuteStart[AppController.instance.lang];
         } else {
-          textTempo = (time ~/ 60).toString() + ' MINUTOS';
+          textTempo = (time ~/ 60).toString() +
+              minutesStart[AppController.instance.lang];
         }
       }
     } else {
       if (time % 60 == 1) {
-        textTempo = (time % 60).toString() + ' SEGUNDO';
+        textTempo =
+            (time % 60).toString() + secondStart[AppController.instance.lang];
       } else {
-        textTempo = (time % 60).toString() + ' SEGUNDOS';
+        textTempo =
+            (time % 60).toString() + secondsStart[AppController.instance.lang];
       }
     }
 
-    textTempo = "TEMPO: " + textTempo;
+    textTempo = timerButtonMenu[AppController.instance.lang] + textTempo;
 
     List<Widget> listWidgets = List.empty(growable: true);
 
@@ -145,7 +150,7 @@ class _StartPageState extends State<StartPage> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('PARTIDA'),
+          title: Text(matchStart[AppController.instance.lang]),
           centerTitle: true,
         ),
         body: SingleChildScrollView(

@@ -14,6 +14,7 @@ class AppController extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool isPortuguese = true;
   String lang = "port";
   changeLanguage(String _lang) {
     lang = _lang;
@@ -51,6 +52,6 @@ class AppController extends ChangeNotifier {
 
 class EquipeCard {
   EquipeCard({this.name, this.color});
-  String name;
+  var name;
   Color color;
 }

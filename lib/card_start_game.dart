@@ -1,3 +1,5 @@
+import 'package:contador_de_jogos/controller/app_controller.dart';
+import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
 
 class CardStartGame extends StatefulWidget {
@@ -45,7 +47,9 @@ class _CardStartGameState extends State<CardStartGame> {
                   minWidth: MediaQuery.of(context).size.width * 0.3,
                 ),
                 child: Text(
-                  nameEquipe,
+                  AppController.instance.isPortuguese
+                      ? nameEquipe
+                      : listNames[nameEquipe],
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

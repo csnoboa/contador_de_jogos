@@ -1,6 +1,7 @@
 import 'package:contador_de_jogos/storage/counter_storage.dart';
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:contador_de_jogos/language/language.dart';
 
 class MenuPage extends StatefulWidget {
   MenuPage({Key key}) : super(key: key);
@@ -14,7 +15,7 @@ class _MenuPageState extends State<MenuPage> {
 
   String _stopwatchText;
 
-  List<String> listNames = [
+  List<String> listNamesString = [
     "ROXO",
     "ROSA",
     "LARANJA",
@@ -24,8 +25,9 @@ class _MenuPageState extends State<MenuPage> {
     "AZUL",
     "VERDE",
     "AMARELO",
-    "VERMELHO"
+    "VERMELHO",
   ];
+
   List<Color> listColors = [
     Colors.purple,
     Colors.pink,
@@ -44,7 +46,7 @@ class _MenuPageState extends State<MenuPage> {
     List<Widget> listAddedWidgets = List.empty(growable: true);
 
     for (int i = 0; i < AppController.instance.sizeListCard(); i++) {
-      listNames.remove(AppController.instance.listEquipeCard[i].name);
+      listNamesString.remove(AppController.instance.listEquipeCard[i].name);
       listColors.remove(AppController.instance.listEquipeCard[i].color);
 
       listAddedWidgets.add(
@@ -64,14 +66,17 @@ class _MenuPageState extends State<MenuPage> {
                   minWidth: MediaQuery.of(context).size.width * 0.35,
                 ),
                 child: Text(
-                  AppController.instance.listEquipeCard[i].name,
+                  AppController.instance.isPortuguese
+                      ? AppController.instance.listEquipeCard[i].name
+                      : listNames[
+                          AppController.instance.listEquipeCard[i].name],
                   style: TextStyle(fontSize: 20),
                 ),
               ),
               IconButton(
                 onPressed: () {
                   setState(() {
-                    listNames
+                    listNamesString
                         .add(AppController.instance.listEquipeCard[i].name);
                     listColors
                         .add(AppController.instance.listEquipeCard[i].color);
@@ -108,7 +113,7 @@ class _MenuPageState extends State<MenuPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 30),
-                child: Text("TEMPO: ",
+                child: Text(timerButtonMenu[AppController.instance.lang],
                     style:
                         TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
               ),
@@ -184,7 +189,7 @@ class _MenuPageState extends State<MenuPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 10),
                 child: Text(
-                  "EQUIPES:",
+                  teamButtonMenu[AppController.instance.lang],
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -197,13 +202,14 @@ class _MenuPageState extends State<MenuPage> {
                   onPressed: () {
                     setState(() {
                       EquipeCard equipe = EquipeCard(
-                          name: listNames.removeLast(),
-                          color: listColors.removeLast());
+                        name: listNamesString.removeLast(),
+                        color: listColors.removeLast(),
+                      );
                       AppController.instance.addEquipeCard(equipe);
                     });
                   },
                 ),
-                visible: (listNames.isEmpty ? false : true),
+                visible: (listColors.isEmpty ? false : true),
               ),
             ],
           ),

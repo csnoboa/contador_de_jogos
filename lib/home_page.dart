@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.of(context).pushNamed('/start');
                     });
                   },
-                  child: Text('COMEÇAR',
+                  child: Text(startButtonHome[AppController.instance.lang],
                       style: TextStyle(
                         fontSize: 40,
                         color: Colors.white,
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.of(context).pushNamed('/menu');
                 },
                 child: Text(
-                  'MENU',
+                  menuButtonHome[AppController.instance.lang],
                   style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
               ),
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.of(context).pushNamed('/options');
                 },
                 child: Text(
-                  'OPÇÕES',
+                  optionsButtonHome[AppController.instance.lang],
                   style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
               ),

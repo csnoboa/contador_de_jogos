@@ -10,11 +10,8 @@ class OptionsPage extends StatefulWidget {
 }
 
 class _OptionsPageState extends State<OptionsPage> {
-  bool isPortuguese = true;
-
   @override
   Widget build(BuildContext context) {
-    isPortuguese = (AppController.instance.lang == "port") ? true : false;
     return Scaffold(
       appBar: AppBar(
         title: Text(titleOptionsPage[AppController.instance.lang]),
@@ -76,10 +73,10 @@ class _OptionsPageState extends State<OptionsPage> {
                     Container(
                       width: 220,
                       child: CheckboxListTile(
-                        value: isPortuguese,
+                        value: AppController.instance.isPortuguese,
                         onChanged: (value) {
                           setState(() {
-                            isPortuguese = true;
+                            AppController.instance.isPortuguese = true;
                             AppController.instance.changeLanguage('port');
                           });
                         },
@@ -92,10 +89,10 @@ class _OptionsPageState extends State<OptionsPage> {
                     Container(
                       width: 220,
                       child: CheckboxListTile(
-                        value: !isPortuguese,
+                        value: !AppController.instance.isPortuguese,
                         onChanged: (value) {
                           setState(() {
-                            isPortuguese = false;
+                            AppController.instance.isPortuguese = false;
                             AppController.instance.changeLanguage('eng');
                           });
                         },
