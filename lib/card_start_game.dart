@@ -1,3 +1,5 @@
+import 'package:contador_de_jogos/controller/app_controller.dart';
+import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
 
 class CardStartGame extends StatefulWidget {
@@ -45,12 +47,21 @@ class _CardStartGameState extends State<CardStartGame> {
                   minWidth: MediaQuery.of(context).size.width * 0.3,
                 ),
                 child: Text(
-                  nameEquipe,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  AppController.instance.isPortuguese
+                      ? nameEquipe
+                      : listNames[nameEquipe],
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               IconButton(
-                icon: Icon(Icons.remove_circle_outline),
+                icon: Icon(
+                  Icons.remove_circle_outline,
+                  color: Colors.black,
+                ),
                 onPressed: () {
                   setState(() {
                     decreaseCount();
@@ -63,11 +74,15 @@ class _CardStartGameState extends State<CardStartGame> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
               Container(width: 5),
               IconButton(
-                icon: Icon(Icons.add_circle_outline),
+                icon: Icon(
+                  Icons.add_circle_outline,
+                  color: Colors.black,
+                ),
                 onPressed: () {
                   setState(() {
                     increaseCount();

@@ -1,4 +1,5 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
+import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
 import 'package:contador_de_jogos/card_start_game.dart';
 import 'dart:async';
@@ -37,12 +38,16 @@ class _StartPageState extends State<StartPage> {
           _timer.cancel();
           _running = false;
           _pause = true;
-          FlutterRingtonePlayer.playAlarm();
+          if (AppController.instance.isSoundOn) {
+            FlutterRingtonePlayer.playAlarm();
+          }
         } else {
           _timer.cancel();
           _running = false;
           _pause = true;
-          FlutterRingtonePlayer.playAlarm();
+          if (AppController.instance.isSoundOn) {
+            FlutterRingtonePlayer.playAlarm();
+          }
         }
         _setCounterText();
       });
@@ -96,37 +101,41 @@ class _StartPageState extends State<StartPage> {
         if (time ~/ 60 == 1) {
           if (time % 60 == 1) {
             textTempo = (time ~/ 60).toString() +
-                ' MINUTO E ' +
+                minuteAndStart[AppController.instance.lang] +
                 (time % 60).toString() +
-                ' SEGUNDO';
+                secondStart[AppController.instance.lang];
           } else {
             textTempo = (time ~/ 60).toString() +
-                ' MINUTO E ' +
+                minuteAndStart[AppController.instance.lang] +
                 (time % 60).toString() +
-                ' SEGUNDOS';
+                secondsStart[AppController.instance.lang];
           }
         } else {
           textTempo = (time ~/ 60).toString() +
-              ' MINUTOS E ' +
+              minutesAndStart[AppController.instance.lang] +
               (time % 60).toString() +
-              ' SEGUNDOS';
+              secondsStart[AppController.instance.lang];
         }
       } else {
         if (time ~/ 60 == 1) {
-          textTempo = (time ~/ 60).toString() + ' MINUTO';
+          textTempo = (time ~/ 60).toString() +
+              minuteStart[AppController.instance.lang];
         } else {
-          textTempo = (time ~/ 60).toString() + ' MINUTOS';
+          textTempo = (time ~/ 60).toString() +
+              minutesStart[AppController.instance.lang];
         }
       }
     } else {
       if (time % 60 == 1) {
-        textTempo = (time % 60).toString() + ' SEGUNDO';
+        textTempo =
+            (time % 60).toString() + secondStart[AppController.instance.lang];
       } else {
-        textTempo = (time % 60).toString() + ' SEGUNDOS';
+        textTempo =
+            (time % 60).toString() + secondsStart[AppController.instance.lang];
       }
     }
 
-    textTempo = "TEMPO: " + textTempo;
+    textTempo = timerButtonMenu[AppController.instance.lang] + textTempo;
 
     List<Widget> listWidgets = List.empty(growable: true);
 
@@ -141,7 +150,7 @@ class _StartPageState extends State<StartPage> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('PARTIDA'),
+          title: Text(matchStart[AppController.instance.lang]),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -152,7 +161,9 @@ class _StartPageState extends State<StartPage> {
               constraints: BoxConstraints(
                 minHeight: MediaQuery.of(context).size.height * 0.78,
               ),
-              color: Colors.amber[100],
+              color: AppController.instance.isDarkTheme
+                  ? Colors.grey[700]
+                  : Colors.amber[100],
               child: Padding(
                 padding: const EdgeInsets.only(top: 25.0, left: 15),
                 child: Column(
@@ -178,6 +189,7 @@ class _StartPageState extends State<StartPage> {
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -190,6 +202,7 @@ class _StartPageState extends State<StartPage> {
                                 ? Icons.pause_outlined
                                 : Icons.play_arrow_outlined,
                             size: 40,
+                            color: Colors.black,
                           ),
                           onPressed: _startStopButtonPressed,
                         ),
@@ -197,6 +210,7 @@ class _StartPageState extends State<StartPage> {
                           icon: Icon(
                             Icons.stop_outlined,
                             size: 40,
+                            color: Colors.black,
                           ),
                           onPressed: _resetButtonPressed,
                         ),

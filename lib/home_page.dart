@@ -1,6 +1,6 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
-import 'package:contador_de_jogos/storage/counter_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:contador_de_jogos/language/language.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -12,11 +12,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    CounterStorage().readCounter().then((int value) {
-      setState(() {
-        print(value);
-        AppController.instance.changeTime(value);
-      });
+    setState(() {
+      AppController.instance.importFileConfig();
     });
   }
 
@@ -28,7 +25,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: AppBar(
           title: Padding(
             padding: const EdgeInsets.only(top: 35.0),
-            child: Text('CONTADOR DE JOGOS', style: TextStyle(fontSize: 28)),
+            child: Text(titleHomeLang[AppController.instance.lang],
+                style: TextStyle(fontSize: 28)),
           ),
           centerTitle: true,
         ),
@@ -48,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.of(context).pushNamed('/start');
                     });
                   },
-                  child: Text('COMEÇAR',
+                  child: Text(startButtonHome[AppController.instance.lang],
                       style: TextStyle(
                         fontSize: 40,
                         color: Colors.white,
@@ -62,9 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 50,
               child: RaisedButton(
                 color: Colors.yellowAccent,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/menu');
+                },
                 child: Text(
-                  'MENU',
+                  menuButtonHome[AppController.instance.lang],
                   style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
               ),
@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.of(context).pushNamed('/options');
                 },
                 child: Text(
-                  'OPÇÕES',
+                  optionsButtonHome[AppController.instance.lang],
                   style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
               ),
