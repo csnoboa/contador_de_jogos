@@ -12,6 +12,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AppController.instance.importFileConfig();
     return AnimatedBuilder(
       builder: (context, child) {
         return MaterialApp(

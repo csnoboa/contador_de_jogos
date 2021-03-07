@@ -101,6 +101,7 @@ class _MenuPageState extends State<MenuPage> {
       onWillPop: () async {
         AppController.instance.changeTime(_counter);
         CounterStorage().writeCounter(_counter);
+        AppController.instance.saveFileConfig();
         return true;
       },
       child: Scaffold(

@@ -1,5 +1,4 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
-import 'package:contador_de_jogos/storage/counter_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:contador_de_jogos/language/language.dart';
 
@@ -13,11 +12,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    CounterStorage().readCounter().then((int value) {
-      setState(() {
-        print(value);
-        AppController.instance.changeTime(value);
-      });
+    setState(() {
+      AppController.instance.importFileConfig();
     });
   }
 
