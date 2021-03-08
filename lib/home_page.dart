@@ -31,8 +31,10 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Container(
                 width: 250,
                 height: 250,
-                child: RaisedButton(
-                  color: Colors.redAccent,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.redAccent,
+                  ),
                   onPressed: () {
                     setState(() {
                       Navigator.of(context).pushNamed('/start');
@@ -41,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(startButtonHome[AppController.instance.lang],
                       style: TextStyle(
                         fontSize: 40,
-                        color: Colors.white,
+                        color: Colors.black,
                       )),
                 ),
               ),
@@ -50,8 +52,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: 150,
               height: 50,
-              child: RaisedButton(
-                color: Colors.yellowAccent,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.yellowAccent,
+                ),
                 onPressed: () {
                   Navigator.of(context).pushNamed('/menu');
                 },
@@ -65,8 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: 150,
               height: 50,
-              child: RaisedButton(
-                color: Colors.yellowAccent,
+              color: Colors.yellowAccent,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.yellowAccent,
+                ),
                 onPressed: () {
                   Navigator.of(context).pushNamed('/options');
                 },

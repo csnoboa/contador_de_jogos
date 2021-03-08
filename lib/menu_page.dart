@@ -153,7 +153,7 @@ class _MenuPageState extends State<MenuPage> {
                             child: Container(
                               width: 60,
                               height: 60,
-                              child: RaisedButton(
+                              child: ElevatedButton(
                                 child: Text('-10'),
                                 onPressed: () {
                                   setState(() {
@@ -200,7 +200,7 @@ class _MenuPageState extends State<MenuPage> {
                             child: Container(
                               width: 60,
                               height: 60,
-                              child: RaisedButton(
+                              child: ElevatedButton(
                                 child: Text('+10'),
                                 onPressed: () {
                                   setState(() {

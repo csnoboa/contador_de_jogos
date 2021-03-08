@@ -1,3 +1,4 @@
+// import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,24 @@ class _StartPageState extends State<StartPage> {
 
   Color timerColor = Colors.black;
 
+  // final assetsAudioPlayer = AssetsAudioPlayer();
+
+  // playAudio() async {
+  //   assetsAudioPlayer.open(
+  //     Audio("assets/sounds/tictoc.mp3"),
+  //   );
+  //   assetsAudioPlayer.setLoopMode(LoopMode.single);
+  //   assetsAudioPlayer.play();
+  // }
+
+  // stopAudio() {
+  //   assetsAudioPlayer.stop();
+  // }
+
+  // speedAudio() {
+  //   // assetsAudioPlayer.forwardRewind(2);
+  // }
+
   void _startTimer() {
     if (_timer != null) {
       _timer.cancel();
@@ -42,6 +61,7 @@ class _StartPageState extends State<StartPage> {
           timerColor = Colors.red;
           _counter--;
           _timer.cancel();
+          // stopAudio();
           _running = false;
           _pause = true;
           if (AppController.instance.isSoundOn) {
@@ -49,6 +69,7 @@ class _StartPageState extends State<StartPage> {
           }
         } else {
           _timer.cancel();
+          // stopAudio();
           _running = false;
           _pause = true;
           timerColor = Colors.red;
@@ -74,8 +95,10 @@ class _StartPageState extends State<StartPage> {
       if (_running) {
         _running = false;
         _pause = true;
+        // stopAudio();
         _timer.cancel();
       } else {
+        // playAudio();
         _running = true;
         _pause = false;
         _startTimer();
@@ -92,7 +115,6 @@ class _StartPageState extends State<StartPage> {
       setState(() {
         timerColor = Colors.black;
         _counter = time;
-        // _setCounterText();
       });
     }
   }
