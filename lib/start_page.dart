@@ -25,6 +25,8 @@ class _StartPageState extends State<StartPage> {
   bool _pause = false;
   String textTempo = ' ';
 
+  Color timerColor = Colors.black;
+
   void _startTimer() {
     if (_timer != null) {
       _timer.cancel();
@@ -33,7 +35,11 @@ class _StartPageState extends State<StartPage> {
       setState(() {
         if (_counter > 1) {
           _counter--;
+          if (_counter <= 0.2 * time) {
+            timerColor = Colors.red;
+          }
         } else if (_counter == 1) {
+          timerColor = Colors.red;
           _counter--;
           _timer.cancel();
           _running = false;
@@ -45,6 +51,7 @@ class _StartPageState extends State<StartPage> {
           _timer.cancel();
           _running = false;
           _pause = true;
+          timerColor = Colors.red;
           if (AppController.instance.isSoundOn) {
             FlutterRingtonePlayer.playAlarm();
           }
@@ -79,12 +86,15 @@ class _StartPageState extends State<StartPage> {
   void _resetButtonPressed() {
     FlutterRingtonePlayer.stop();
     if (_running) {
+      // timerColor = Colors.black;
       _startStopButtonPressed();
+    } else {
+      setState(() {
+        timerColor = Colors.black;
+        _counter = time;
+        // _setCounterText();
+      });
     }
-    setState(() {
-      _counter = time;
-      _setCounterText();
-    });
   }
 
   @override
@@ -189,7 +199,7 @@ class _StartPageState extends State<StartPage> {
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: timerColor,
                         ),
                       ),
                     ),
