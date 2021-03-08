@@ -24,7 +24,6 @@ dependencies:
   path_provider: ^1.6.27
   flutter:
     sdk: flutter
-  
   flutter_ringtone_player: ^2.0.0
 
 
@@ -50,8 +49,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/json/config.json
+  assets:
+    - assets/sounds/
   #   - assets/json/configtext.txt
   #   - images/a_dot_ham.jpeg
 

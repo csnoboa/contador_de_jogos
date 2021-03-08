@@ -7,6 +7,10 @@ var menuButtonHome = {"port": "MENU", "eng": "MENU"};
 //Menu Page
 var timerButtonMenu = {"port": "TEMPO: ", "eng": "TIMER: "};
 var teamButtonMenu = {"port": "EQUIPE: ", "eng": "TEAM: "};
+var switchTimerVisible = {
+  "port": "HABILITAR CRONOMETRO: ",
+  "eng": "ABLE TIMER: "
+};
 
 //Options Page
 var titleOptionsPage = {"port": "OPÇÕES", "eng": "OPTIONS"};

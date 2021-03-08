@@ -32,6 +32,7 @@ class ConfigStorage {
           isSoundOn: true,
           isDarkTheme: false,
           isPortuguese: true,
+          isTimerVisible: true,
           lang: 'port');
     }
   }
@@ -51,6 +52,7 @@ class Config {
   bool isSoundOn;
   bool isPortuguese;
   bool isDarkTheme;
+  bool isTimerVisible;
 
   String lang;
 
@@ -59,12 +61,14 @@ class Config {
       this.isPortuguese,
       this.isDarkTheme,
       this.lang,
+      this.isTimerVisible,
       this.time});
 
   Config.fromJson(Map<String, dynamic> json)
       : isSoundOn = json['isSoundOn'],
         isPortuguese = json['isPortuguese'],
         isDarkTheme = json['isDarkTheme'],
+        isTimerVisible = json['isTimerVisible'],
         lang = json['lang'],
         time = json['time'];
 
@@ -72,6 +76,7 @@ class Config {
         'isSoundOn': isSoundOn,
         'isPortuguese': isPortuguese,
         'isDarkTheme': isDarkTheme,
+        'isTimerVisible': isTimerVisible,
         'lang': lang,
         'time': time,
       };

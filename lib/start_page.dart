@@ -1,3 +1,4 @@
+// import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,26 @@ class _StartPageState extends State<StartPage> {
   bool _pause = false;
   String textTempo = ' ';
 
+  Color timerColor = Colors.black;
+
+  // final assetsAudioPlayer = AssetsAudioPlayer();
+
+  // playAudio() async {
+  //   assetsAudioPlayer.open(
+  //     Audio("assets/sounds/tictoc.mp3"),
+  //   );
+  //   assetsAudioPlayer.setLoopMode(LoopMode.single);
+  //   assetsAudioPlayer.play();
+  // }
+
+  // stopAudio() {
+  //   assetsAudioPlayer.stop();
+  // }
+
+  // speedAudio() {
+  //   // assetsAudioPlayer.forwardRewind(2);
+  // }
+
   void _startTimer() {
     if (_timer != null) {
       _timer.cancel();
@@ -33,9 +54,14 @@ class _StartPageState extends State<StartPage> {
       setState(() {
         if (_counter > 1) {
           _counter--;
+          if (_counter <= 0.2 * time) {
+            timerColor = Colors.red;
+          }
         } else if (_counter == 1) {
+          timerColor = Colors.red;
           _counter--;
           _timer.cancel();
+          // stopAudio();
           _running = false;
           _pause = true;
           if (AppController.instance.isSoundOn) {
@@ -43,8 +69,10 @@ class _StartPageState extends State<StartPage> {
           }
         } else {
           _timer.cancel();
+          // stopAudio();
           _running = false;
           _pause = true;
+          timerColor = Colors.red;
           if (AppController.instance.isSoundOn) {
             FlutterRingtonePlayer.playAlarm();
           }
@@ -67,8 +95,10 @@ class _StartPageState extends State<StartPage> {
       if (_running) {
         _running = false;
         _pause = true;
+        // stopAudio();
         _timer.cancel();
       } else {
+        // playAudio();
         _running = true;
         _pause = false;
         _startTimer();
@@ -79,12 +109,14 @@ class _StartPageState extends State<StartPage> {
   void _resetButtonPressed() {
     FlutterRingtonePlayer.stop();
     if (_running) {
+      // timerColor = Colors.black;
       _startStopButtonPressed();
+    } else {
+      setState(() {
+        timerColor = Colors.black;
+        _counter = time;
+      });
     }
-    setState(() {
-      _counter = time;
-      _setCounterText();
-    });
   }
 
   @override
@@ -170,51 +202,58 @@ class _StartPageState extends State<StartPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Column(children: listWidgets),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        textTempo,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Container(height: 50),
-                    FittedBox(
-                      fit: BoxFit.none,
-                      child: Text(
-                        _stopwatchText,
-                        style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            _running
-                                ? Icons.pause_outlined
-                                : Icons.play_arrow_outlined,
-                            size: 40,
-                            color: Colors.black,
+                    Visibility(
+                      visible: AppController.instance.isTimerVisible,
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              textTempo,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
-                          onPressed: _startStopButtonPressed,
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.stop_outlined,
-                            size: 40,
-                            color: Colors.black,
+                          Container(height: 50),
+                          FittedBox(
+                            fit: BoxFit.none,
+                            child: Text(
+                              _stopwatchText,
+                              style: TextStyle(
+                                fontSize: 50,
+                                fontWeight: FontWeight.bold,
+                                color: timerColor,
+                              ),
+                            ),
                           ),
-                          onPressed: _resetButtonPressed,
-                        ),
-                      ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(
+                                  _running
+                                      ? Icons.pause_outlined
+                                      : Icons.play_arrow_outlined,
+                                  size: 40,
+                                  color: Colors.black,
+                                ),
+                                onPressed: _startStopButtonPressed,
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.stop_outlined,
+                                  size: 40,
+                                  color: Colors.black,
+                                ),
+                                onPressed: _resetButtonPressed,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

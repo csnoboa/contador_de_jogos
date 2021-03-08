@@ -12,6 +12,7 @@ class AppController extends ChangeNotifier {
   bool isSoundOn = true;
   bool isPortuguese = true;
   bool isDarkTheme = false;
+  bool isTimerVisible = true;
 
   String lang = 'port';
 
@@ -23,12 +24,10 @@ class AppController extends ChangeNotifier {
   importFileConfig() {
     ConfigStorage().readConfig().then((Config value) {
       print(value);
-      // this.time = value.time;
       changeTime(value.time);
       isDarkTheme = value.isDarkTheme;
-      // this.isPortuguese = value.isPortuguese;
       isSoundOn = value.isSoundOn;
-      // this.lang = value.lang;
+      isTimerVisible = value.isTimerVisible;
       changeLanguage(value.lang);
     });
     notifyListeners();
@@ -41,6 +40,7 @@ class AppController extends ChangeNotifier {
         isDarkTheme: this.isDarkTheme,
         isPortuguese: this.isPortuguese,
         isSoundOn: this.isSoundOn,
+        isTimerVisible: this.isTimerVisible,
         lang: this.lang,
       ),
     );
@@ -48,6 +48,11 @@ class AppController extends ChangeNotifier {
 
   changeSound() {
     isSoundOn = !isSoundOn;
+    notifyListeners();
+  }
+
+  changeTimerVisible() {
+    isTimerVisible = !isTimerVisible;
     notifyListeners();
   }
 
