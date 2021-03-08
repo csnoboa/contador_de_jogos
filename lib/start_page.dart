@@ -180,51 +180,58 @@ class _StartPageState extends State<StartPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Column(children: listWidgets),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        textTempo,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Container(height: 50),
-                    FittedBox(
-                      fit: BoxFit.none,
-                      child: Text(
-                        _stopwatchText,
-                        style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
-                          color: timerColor,
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            _running
-                                ? Icons.pause_outlined
-                                : Icons.play_arrow_outlined,
-                            size: 40,
-                            color: Colors.black,
+                    Visibility(
+                      visible: AppController.instance.isTimerVisible,
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              textTempo,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
-                          onPressed: _startStopButtonPressed,
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.stop_outlined,
-                            size: 40,
-                            color: Colors.black,
+                          Container(height: 50),
+                          FittedBox(
+                            fit: BoxFit.none,
+                            child: Text(
+                              _stopwatchText,
+                              style: TextStyle(
+                                fontSize: 50,
+                                fontWeight: FontWeight.bold,
+                                color: timerColor,
+                              ),
+                            ),
                           ),
-                          onPressed: _resetButtonPressed,
-                        ),
-                      ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(
+                                  _running
+                                      ? Icons.pause_outlined
+                                      : Icons.play_arrow_outlined,
+                                  size: 40,
+                                  color: Colors.black,
+                                ),
+                                onPressed: _startStopButtonPressed,
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.stop_outlined,
+                                  size: 40,
+                                  color: Colors.black,
+                                ),
+                                onPressed: _resetButtonPressed,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
