@@ -34,6 +34,26 @@ class _OptionsPageState extends State<OptionsPage> {
                     style: TextStyle(fontSize: 20),
                   ),
                   Switch(
+                    value: AppController.instance.isAlarmOn,
+                    onChanged: (value) {
+                      setState(
+                        () {
+                          AppController.instance.changeAlarm();
+                        },
+                      );
+                    },
+                  )
+                ],
+              ),
+              Container(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    switchSound[AppController.instance.lang],
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Switch(
                     value: AppController.instance.isSoundOn,
                     onChanged: (value) {
                       setState(
