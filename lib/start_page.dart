@@ -1,4 +1,5 @@
-// import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
@@ -28,23 +29,25 @@ class _StartPageState extends State<StartPage> {
 
   Color timerColor = Colors.black;
 
-  // final assetsAudioPlayer = AssetsAudioPlayer();
+  AudioPlayer player = new AudioPlayer();
+  AudioCache cache = new AudioCache();
+  String audioPath = "sounds/tictoc.mp3";
 
-  // playAudio() async {
-  //   assetsAudioPlayer.open(
-  //     Audio("assets/sounds/tictoc.mp3"),
-  //   );
-  //   assetsAudioPlayer.setLoopMode(LoopMode.single);
-  //   assetsAudioPlayer.play();
-  // }
+  void playAudio() async {
+    player = await cache.loop(audioPath);
+  }
 
-  // stopAudio() {
-  //   assetsAudioPlayer.stop();
-  // }
+  void stopAudio() {
+    player?.stop();
+  }
 
-  // speedAudio() {
-  //   // assetsAudioPlayer.forwardRewind(2);
-  // }
+  loadAudio() async {
+    cache.load(audioPath);
+  }
+
+  speedAudio() {
+    player.setPlaybackRate(playbackRate: 2);
+  }
 
   void _startTimer() {
     if (_timer != null) {
@@ -56,12 +59,13 @@ class _StartPageState extends State<StartPage> {
           _counter--;
           if (_counter <= 0.2 * time) {
             timerColor = Colors.red;
+            speedAudio();
           }
         } else if (_counter == 1) {
           timerColor = Colors.red;
           _counter--;
           _timer.cancel();
-          // stopAudio();
+          stopAudio();
           _running = false;
           _pause = true;
           if (AppController.instance.isSoundOn) {
@@ -69,7 +73,7 @@ class _StartPageState extends State<StartPage> {
           }
         } else {
           _timer.cancel();
-          // stopAudio();
+          stopAudio();
           _running = false;
           _pause = true;
           timerColor = Colors.red;
@@ -95,10 +99,10 @@ class _StartPageState extends State<StartPage> {
       if (_running) {
         _running = false;
         _pause = true;
-        // stopAudio();
+        stopAudio();
         _timer.cancel();
       } else {
-        // playAudio();
+        playAudio();
         _running = true;
         _pause = false;
         _startTimer();
@@ -109,10 +113,10 @@ class _StartPageState extends State<StartPage> {
   void _resetButtonPressed() {
     FlutterRingtonePlayer.stop();
     if (_running) {
-      // timerColor = Colors.black;
       _startStopButtonPressed();
     } else {
       setState(() {
+        stopAudio();
         timerColor = Colors.black;
         _counter = time;
       });
@@ -121,6 +125,8 @@ class _StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
+    // loadAudio();
+
     _counter = (_running || _pause) ? _counter : _counter = time;
 
     _stopwatchText = (_counter ~/ 60).toString() +
