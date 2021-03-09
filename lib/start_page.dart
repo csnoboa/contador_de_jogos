@@ -59,7 +59,9 @@ class _StartPageState extends State<StartPage> {
           _counter--;
           if (_counter <= 0.2 * time) {
             timerColor = Colors.red;
-            speedAudio();
+            if (AppController.instance.isSoundOn) {
+              speedAudio();
+            }
           }
         } else if (_counter == 1) {
           timerColor = Colors.red;
@@ -68,7 +70,7 @@ class _StartPageState extends State<StartPage> {
           stopAudio();
           _running = false;
           _pause = true;
-          if (AppController.instance.isSoundOn) {
+          if (AppController.instance.isAlarmOn) {
             FlutterRingtonePlayer.playAlarm();
           }
         } else {
@@ -77,7 +79,7 @@ class _StartPageState extends State<StartPage> {
           _running = false;
           _pause = true;
           timerColor = Colors.red;
-          if (AppController.instance.isSoundOn) {
+          if (AppController.instance.isAlarmOn) {
             FlutterRingtonePlayer.playAlarm();
           }
         }
@@ -102,10 +104,12 @@ class _StartPageState extends State<StartPage> {
         stopAudio();
         _timer.cancel();
       } else {
-        playAudio();
         _running = true;
         _pause = false;
         _startTimer();
+        if (AppController.instance.isSoundOn) {
+          playAudio();
+        }
       }
     });
   }
@@ -125,7 +129,9 @@ class _StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
-    // loadAudio();
+    if (AppController.instance.isSoundOn) {
+      loadAudio();
+    }
 
     _counter = (_running || _pause) ? _counter : _counter = time;
 

@@ -10,6 +10,7 @@ class AppController extends ChangeNotifier {
   int time = 60;
 
   bool isSoundOn = true;
+  bool isAlarmOn = true;
   bool isPortuguese = true;
   bool isDarkTheme = false;
   bool isTimerVisible = true;
@@ -28,6 +29,7 @@ class AppController extends ChangeNotifier {
       isDarkTheme = value.isDarkTheme;
       isSoundOn = value.isSoundOn;
       isTimerVisible = value.isTimerVisible;
+      isAlarmOn = value.isAlarmOn;
       changeLanguage(value.lang);
     });
     notifyListeners();
@@ -40,6 +42,7 @@ class AppController extends ChangeNotifier {
         isDarkTheme: this.isDarkTheme,
         isPortuguese: this.isPortuguese,
         isSoundOn: this.isSoundOn,
+        isAlarmOn: this.isAlarmOn,
         isTimerVisible: this.isTimerVisible,
         lang: this.lang,
       ),
@@ -48,6 +51,11 @@ class AppController extends ChangeNotifier {
 
   changeSound() {
     isSoundOn = !isSoundOn;
+    notifyListeners();
+  }
+
+  changeAlarm() {
+    isAlarmOn = !isAlarmOn;
     notifyListeners();
   }
 
