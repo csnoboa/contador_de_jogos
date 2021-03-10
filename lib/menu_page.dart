@@ -1,4 +1,3 @@
-import 'package:contador_de_jogos/storage/counter_storage.dart';
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:contador_de_jogos/language/language.dart';
@@ -100,7 +99,6 @@ class _MenuPageState extends State<MenuPage> {
     return WillPopScope(
       onWillPop: () async {
         AppController.instance.changeTime(_counter);
-        CounterStorage().writeCounter(_counter);
         AppController.instance.saveFileConfig();
         return true;
       },

@@ -2,25 +2,32 @@ import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
 
-class CardStartGame extends StatefulWidget {
-  CardStartGame({Key key, this.colorEquipe, this.nameEquipe}) : super(key: key);
+class EquipeCardGame extends StatefulWidget {
+  EquipeCardGame(
+      {Key key, this.colorEquipe, this.nameEquipe, this.arrowSelected})
+      : super(key: key);
 
   final Color colorEquipe;
   final String nameEquipe;
+  final bool arrowSelected;
 
   @override
-  _CardStartGameState createState() => _CardStartGameState(
-      colorEquipe: this.colorEquipe, nameEquipe: this.nameEquipe);
+  _EquipeCardGameState createState() => _EquipeCardGameState(
+      colorEquipe: this.colorEquipe,
+      nameEquipe: this.nameEquipe,
+      arrowSelected: this.arrowSelected);
 }
 
-class _CardStartGameState extends State<CardStartGame> {
-  _CardStartGameState({
+class _EquipeCardGameState extends State<EquipeCardGame> {
+  _EquipeCardGameState({
     this.colorEquipe,
     this.nameEquipe,
+    this.arrowSelected,
   });
 
   Color colorEquipe;
   String nameEquipe;
+  bool arrowSelected;
 
   int _count = 0;
 
@@ -32,6 +39,12 @@ class _CardStartGameState extends State<CardStartGame> {
     _count--;
   }
 
+  void changeArrowSelected() {
+    setState(() {
+      arrowSelected = !arrowSelected;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,6 +53,10 @@ class _CardStartGameState extends State<CardStartGame> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Visibility(
+                visible: arrowSelected,
+                child: Icon(Icons.arrow_right_alt),
+              ),
               Container(width: 50, height: 50, color: colorEquipe),
               Container(width: 10),
               Container(

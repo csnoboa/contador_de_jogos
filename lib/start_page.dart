@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:contador_de_jogos/controller/app_controller.dart';
@@ -26,6 +28,8 @@ class _StartPageState extends State<StartPage> {
   bool _running = false;
   bool _pause = false;
   String textTempo = ' ';
+
+  int selected = 0;
 
   Color timerColor = Colors.black;
 
@@ -181,16 +185,28 @@ class _StartPageState extends State<StartPage> {
 
     textTempo = timerButtonMenu[AppController.instance.lang] + textTempo;
 
-    List<Widget> listWidgets = List.empty(growable: true);
+    List<EquipeCardGame> listWidgets = List.empty(growable: true);
 
     for (int i = 0; i < AppController.instance.sizeListCard(); i++) {
-      listWidgets.add(
-        CardStartGame(
-          colorEquipe: AppController.instance.listEquipeCard[i].color,
-          nameEquipe: AppController.instance.listEquipeCard[i].name,
-        ),
-      );
+      if (i == 0) {
+        listWidgets.add(
+          EquipeCardGame(
+            colorEquipe: AppController.instance.listEquipeCard[i].color,
+            nameEquipe: AppController.instance.listEquipeCard[i].name,
+            arrowSelected: true,
+          ),
+        );
+      } else {
+        listWidgets.add(
+          EquipeCardGame(
+            colorEquipe: AppController.instance.listEquipeCard[i].color,
+            nameEquipe: AppController.instance.listEquipeCard[i].name,
+            arrowSelected: false,
+          ),
+        );
+      }
     }
+
     return Container(
       child: Scaffold(
         appBar: AppBar(
@@ -214,6 +230,26 @@ class _StartPageState extends State<StartPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Column(children: listWidgets),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: ElevatedButton(
+                        child: Text('Sort'),
+                        onPressed: () {
+                          setState(() {
+                            int newSelected = Random()
+                                .nextInt(AppController.instance.sizeListCard());
+                            // listKey[newSelected].currentState.setState(() {
+                            // widget.arrowSelected = true;
+                            // });
+                            // listWidgets[selected].arrowSelected = false;
+
+                            selected = newSelected;
+                            print(newSelected);
+                          });
+                        },
+                      ),
+                    ),
+                    Container(height: 10),
                     Visibility(
                       visible: AppController.instance.isTimerVisible,
                       child: Column(
