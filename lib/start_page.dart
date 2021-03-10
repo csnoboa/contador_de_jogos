@@ -222,31 +222,67 @@ class _StartPageState extends State<StartPage> {
                   ? Colors.grey[700]
                   : Colors.amber[100],
               child: Padding(
-                padding: const EdgeInsets.only(top: 25.0, left: 15),
+                padding: const EdgeInsets.only(top: 25.0, left: 15, right: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Column(children: listWidgets),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: ElevatedButton(
-                        child: Text('Sort'),
-                        onPressed: () {
-                          setState(() {
-                            int newSelected = Random()
-                                .nextInt(AppController.instance.sizeListCard());
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.grey,
+                            ),
+                            child: Text(
+                              sortButtonStart[AppController.instance.lang],
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                int selected = Random().nextInt(
+                                    AppController.instance.sizeListCard());
 
-                            AppController.instance
-                                .changeSelected(selected, false);
-                            AppController.instance
-                                .changeSelected(newSelected, true);
+                                for (int i = 0;
+                                    i < AppController.instance.sizeListCard();
+                                    i++) {
+                                  AppController.instance
+                                      .changeSelected(i, false);
+                                }
 
-                            selected = newSelected;
-                            print(newSelected);
-                          });
-                        },
-                      ),
+                                AppController.instance
+                                    .changeSelected(selected, true);
+                              });
+                            },
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.grey,
+                            ),
+                            child: Text(
+                              resetButtonStart[AppController.instance.lang],
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                for (int i = 0;
+                                    i < AppController.instance.sizeListCard();
+                                    i++) {
+                                  AppController
+                                      .instance.listEquipeCard[i].count = 0;
+                                }
+                              });
+                            },
+                          ),
+                        ),
+                      ],
                     ),
+                    Container(height: 15),
+                    Column(children: listWidgets),
                     Container(height: 10),
                     Visibility(
                       visible: AppController.instance.isTimerVisible,

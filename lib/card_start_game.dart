@@ -1,23 +1,6 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
-import 'package:contador_de_jogos/start_page.dart';
-
-// class EquipeCardGame extends StatefulWidget {
-//   EquipeCardGame(
-//       {Key key, this.colorEquipe, this.nameEquipe, this.arrowSelected})
-//       : super(key: key);
-
-//   final Color colorEquipe;
-//   final String nameEquipe;
-//   final bool arrowSelected;
-
-//   @override
-//   _EquipeCardGameState createState() => _EquipeCardGameState(
-//       colorEquipe: this.colorEquipe,
-//       nameEquipe: this.nameEquipe,
-//       arrowSelected: this.arrowSelected);
-// }
 
 class EquipeCardGame extends StatelessWidget {
   EquipeCardGame(
