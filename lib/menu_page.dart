@@ -44,7 +44,7 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     List<Widget> listAddedWidgets = List.empty(growable: true);
 
-    for (int i = 0; i < AppController.instance.sizeListCard(); i++) {
+    for (int i = 0; i < AppController.instance.sizeListEquipeCard(); i++) {
       listNamesString.remove(AppController.instance.listEquipeCard[i].name);
       listColors.remove(AppController.instance.listEquipeCard[i].color);
 

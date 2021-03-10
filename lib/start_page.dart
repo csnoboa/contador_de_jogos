@@ -4,6 +4,7 @@ import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:contador_de_jogos/language/language.dart';
+import 'package:contador_de_jogos/person_card_game.dart';
 import 'package:flutter/material.dart';
 import 'package:contador_de_jogos/card_start_game.dart';
 import 'dart:async';
@@ -191,13 +192,29 @@ class _StartPageState extends State<StartPage> {
 
     List<EquipeCardGame> listWidgets = List.empty(growable: true);
 
-    for (int i = 0; i < AppController.instance.sizeListCard(); i++) {
+    for (int i = 0; i < AppController.instance.sizeListEquipeCard(); i++) {
       listWidgets.add(
         EquipeCardGame(
           colorEquipe: AppController.instance.listEquipeCard[i].color,
           nameEquipe: AppController.instance.listEquipeCard[i].name,
           arrowSelected: AppController.instance.listEquipeCard[i].selected,
           count: AppController.instance.listEquipeCard[i].count,
+          index: i,
+          notifyParent: refresh,
+        ),
+      );
+    }
+
+    List<PersonCardWidget> listPersonWidget = List.empty(growable: true);
+
+    for (int i = 0; i < AppController.instance.sizeListPersonCard(); i++) {
+      listPersonWidget.add(
+        PersonCardWidget(
+          colorEquipe: AppController.instance.listPersonCard[i].color,
+          nameEquipe: AppController.instance.listPersonCard[i].equipe,
+          namePerson: AppController.instance.listPersonCard[i].name,
+          arrowSelected: AppController.instance.listPersonCard[i].selected,
+          count: AppController.instance.listPersonCard[i].count,
           index: i,
           notifyParent: refresh,
         ),
@@ -237,22 +254,44 @@ class _StartPageState extends State<StartPage> {
                             ),
                             child: Text(
                               sortButtonStart[AppController.instance.lang],
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                              ),
                             ),
                             onPressed: () {
                               setState(() {
-                                int selected = Random().nextInt(
-                                    AppController.instance.sizeListCard());
+                                int selected = Random().nextInt(AppController
+                                    .instance
+                                    .sizeListEquipeCard());
 
                                 for (int i = 0;
-                                    i < AppController.instance.sizeListCard();
+                                    i <
+                                        AppController.instance
+                                            .sizeListEquipeCard();
                                     i++) {
                                   AppController.instance
-                                      .changeSelected(i, false);
+                                      .changeSelectedEquipe(i, false);
                                 }
 
                                 AppController.instance
-                                    .changeSelected(selected, true);
+                                    .changeSelectedEquipe(selected, true);
+
+                                selected = Random().nextInt(AppController
+                                    .instance
+                                    .sizeListPersonCard());
+
+                                for (int i = 0;
+                                    i <
+                                        AppController.instance
+                                            .sizeListPersonCard();
+                                    i++) {
+                                  AppController.instance
+                                      .changeSelectedPerson(i, false);
+                                }
+
+                                AppController.instance
+                                    .changeSelectedPerson(selected, true);
                               });
                             },
                           ),
@@ -265,15 +304,28 @@ class _StartPageState extends State<StartPage> {
                             ),
                             child: Text(
                               resetButtonStart[AppController.instance.lang],
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                              ),
                             ),
                             onPressed: () {
                               setState(() {
                                 for (int i = 0;
-                                    i < AppController.instance.sizeListCard();
+                                    i <
+                                        AppController.instance
+                                            .sizeListEquipeCard();
                                     i++) {
                                   AppController
                                       .instance.listEquipeCard[i].count = 0;
+                                }
+                                for (int i = 0;
+                                    i <
+                                        AppController.instance
+                                            .sizeListPersonCard();
+                                    i++) {
+                                  AppController
+                                      .instance.listPersonCard[i].count = 0;
                                 }
                               });
                             },
@@ -281,8 +333,27 @@ class _StartPageState extends State<StartPage> {
                         ),
                       ],
                     ),
-                    Container(height: 15),
-                    Column(children: listWidgets),
+                    Container(height: 20),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            constraints: BoxConstraints(
+                              minWidth: MediaQuery.of(context).size.width * 0.9,
+                            ),
+                            child: Column(children: listWidgets),
+                          ),
+                          Container(
+                              constraints: BoxConstraints(
+                                minWidth:
+                                    MediaQuery.of(context).size.width * 0.9,
+                              ),
+                              child: Column(children: listPersonWidget)),
+                        ],
+                      ),
+                    ),
                     Container(height: 10),
                     Visibility(
                       visible: AppController.instance.isTimerVisible,

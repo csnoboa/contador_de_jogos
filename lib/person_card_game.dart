@@ -1,11 +1,11 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
-import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
 
-class EquipeCardGame extends StatelessWidget {
-  EquipeCardGame(
+class PersonCardWidget extends StatelessWidget {
+  PersonCardWidget(
       {this.colorEquipe,
       this.nameEquipe,
+      this.namePerson,
       this.arrowSelected,
       this.index,
       this.count,
@@ -14,17 +14,18 @@ class EquipeCardGame extends StatelessWidget {
   final Function() notifyParent;
   final Color colorEquipe;
   final String nameEquipe;
+  final String namePerson;
   final bool arrowSelected;
   final index;
   final int count;
 
   void increaseCount() {
-    AppController.instance.increaseCountEquipe(index);
+    AppController.instance.increasePersonCount(index);
     notifyParent();
   }
 
   void decreaseCount() {
-    AppController.instance.decreaseCountEquipe(index);
+    AppController.instance.decreasePersonCount(index);
     notifyParent();
   }
 
@@ -47,9 +48,7 @@ class EquipeCardGame extends StatelessWidget {
                   minWidth: MediaQuery.of(context).size.width * 0.3,
                 ),
                 child: Text(
-                  AppController.instance.isPortuguese
-                      ? nameEquipe
-                      : listNames[nameEquipe],
+                  namePerson,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

@@ -84,7 +84,7 @@ class AppController extends ChangeNotifier {
     EquipeCard(name: "AMARELO", color: Colors.yellow, selected: false, count: 0)
   ];
 
-  changeSelected(int index, bool newSelected) {
+  changeSelectedEquipe(int index, bool newSelected) {
     listEquipeCard[index].changeSelected(newSelected);
     notifyListeners();
   }
@@ -97,16 +97,92 @@ class AppController extends ChangeNotifier {
     listEquipeCard.removeAt(index);
   }
 
-  int sizeListCard() {
+  int sizeListEquipeCard() {
     return listEquipeCard.length;
   }
 
-  increaseCount(int index) {
+  increaseCountEquipe(int index) {
     listEquipeCard[index].increaseCount();
   }
 
-  decreaseCount(int index) {
+  decreaseCountEquipe(int index) {
     listEquipeCard[index].decreaseCount();
+  }
+
+  List<PersonCard> listPersonCard = [
+    PersonCard(
+      name: "Person1",
+      equipe: "AZUL",
+      color: Colors.blue,
+      selected: true,
+      count: 0,
+    ),
+    PersonCard(
+      name: "Person2",
+      equipe: "AZUL",
+      color: Colors.blue,
+      selected: false,
+      count: 0,
+    ),
+    PersonCard(
+      name: "Person3",
+      equipe: "AMARELO",
+      color: Colors.yellow,
+      selected: false,
+      count: 0,
+    ),
+    PersonCard(
+      name: "Person4",
+      equipe: "AMARELO",
+      color: Colors.yellow,
+      selected: false,
+      count: 0,
+    ),
+  ];
+
+  changeSelectedPerson(int index, bool newSelected) {
+    listPersonCard[index].changeSelected(newSelected);
+    notifyListeners();
+  }
+
+  void addPersonCard(PersonCard personCard) {
+    listPersonCard.add(personCard);
+  }
+
+  void removePersonCard(int index) {
+    listPersonCard.removeAt(index);
+  }
+
+  int sizeListPersonCard() {
+    return listPersonCard.length;
+  }
+
+  increasePersonCount(int index) {
+    listPersonCard[index].increaseCount();
+  }
+
+  decreasePersonCount(int index) {
+    listPersonCard[index].decreaseCount();
+  }
+}
+
+class PersonCard {
+  PersonCard({this.name, this.equipe, this.color, this.selected, this.count});
+  String name;
+  String equipe;
+  Color color;
+  bool selected;
+  int count;
+  increaseCount() {
+    count++;
+  }
+
+  decreaseCount() {
+    count--;
+  }
+
+  changeSelected(bool newSelected) {
+    selected = newSelected;
   }
 }
 
