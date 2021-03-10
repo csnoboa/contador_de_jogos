@@ -5,11 +5,16 @@ var optionsButtonHome = {"port": "OPÇÕES", "eng": "OPTIONS"};
 var menuButtonHome = {"port": "MENU", "eng": "MENU"};
 
 //Menu Page
-var timerButtonMenu = {"port": "TEMPO: ", "eng": "TIMER: "};
-var teamButtonMenu = {"port": "EQUIPE: ", "eng": "TEAM: "};
+var timerButtonMenu = {"port": "TEMPO:", "eng": "TIMER:"};
+var teamButtonMenu = {"port": "EQUIPE:", "eng": "TEAM:"};
+var peopleButtonMenu = {"port": "PESSOAS:", "eng": "PEOPLE:"};
 var switchTimerVisible = {
   "port": "HABILITAR CRONOMETRO: ",
   "eng": "ABLE TIMER: "
+};
+var rearrangeButtonMenu = {
+  "port": "REARRANJAR EQUIPES",
+  "eng": "REARRANGE TEAMS"
 };
 
 //Options Page
@@ -26,6 +31,8 @@ var minuteStart = {"port": " MINUTO", "eng": " MINUTE"};
 var minutesStart = {"port": " MINUTOS", "eng": " MINUTES"};
 var secondStart = {"port": " SEGUNDO", "eng": " SECOND"};
 var secondsStart = {"port": " SEGUNDOS", "eng": " SECONDS"};
+var sortButtonStart = {"port": "SORTEAR", "eng": "SORT"};
+var resetButtonStart = {"port": "RESETAR PONTUAÇÕES", "eng": "RESET SCORES"};
 
 var matchStart = {"port": "PARTIDA", "eng": "MATCH"};
 
