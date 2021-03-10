@@ -92,6 +92,46 @@ class _MenuPageState extends State<MenuPage> {
       );
     }
 
+    List<Widget> listAddedPerson = List.empty(growable: true);
+
+    for (int i = 0; i < AppController.instance.sizeListPersonCard(); i++) {
+      listAddedPerson.add(
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 50,
+                height: 50,
+                color: AppController.instance.listPersonCard[i].color,
+              ),
+              Container(width: 20),
+              Container(
+                constraints: BoxConstraints(
+                  minWidth: MediaQuery.of(context).size.width * 0.35,
+                ),
+                child: Text(
+                  AppController.instance.listPersonCard[i].name,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    AppController.instance.removePersonCard(i);
+                  });
+                },
+                icon: Icon(
+                  Icons.remove_circle_outline,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     _stopwatchText = (_counter ~/ 60).toString() +
         ' m ' +
         (_counter % 60).toString().padLeft(2, '0') +
@@ -214,32 +254,91 @@ class _MenuPageState extends State<MenuPage> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 10),
-                child: Text(
-                  teamButtonMenu[AppController.instance.lang],
-                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      constraints: BoxConstraints(
+                          minWidth: MediaQuery.of(context).size.width * 1),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20, bottom: 10),
+                            child: Text(
+                              teamButtonMenu[AppController.instance.lang],
+                              style: TextStyle(
+                                  fontSize: 26, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Column(
+                            children: listAddedWidgets,
+                          ),
+                          Visibility(
+                            child: IconButton(
+                              icon: Icon(Icons.add),
+                              onPressed: () {
+                                setState(() {
+                                  EquipeCard equipe = EquipeCard(
+                                    name: listNamesString.removeLast(),
+                                    color: listColors.removeLast(),
+                                    selected: false,
+                                    count: 0,
+                                  );
+                                  AppController.instance.addEquipeCard(equipe);
+                                });
+                              },
+                            ),
+                            visible: (listColors.isEmpty ? false : true),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      constraints: BoxConstraints(
+                          minWidth: MediaQuery.of(context).size.width * 1),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20, bottom: 10),
+                            child: Text(
+                              peopleButtonMenu[AppController.instance.lang],
+                              style: TextStyle(
+                                  fontSize: 26, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Column(
+                            children: listAddedPerson,
+                          ),
+                          Visibility(
+                            child: IconButton(
+                              icon: Icon(Icons.add),
+                              onPressed: () {
+                                setState(() {
+                                  PersonCard equipe = PersonCard(
+                                    name: "Player" +
+                                        "${AppController.instance.sizeListPersonCard() + 1}",
+                                    color: AppController
+                                            .instance.listEquipeCard[0].color ??
+                                        Colors.blue,
+                                    selected: false,
+                                    count: 0,
+                                  );
+                                  AppController.instance.addPersonCard(equipe);
+                                });
+                              },
+                            ),
+                            visible:
+                                (AppController.instance.sizeListEquipeCard() >
+                                    0),
+                          ),
+                          Container(height: 60),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Column(
-                children: listAddedWidgets,
-              ),
-              Visibility(
-                child: IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    setState(() {
-                      EquipeCard equipe = EquipeCard(
-                        name: listNamesString.removeLast(),
-                        color: listColors.removeLast(),
-                        selected: false,
-                        count: 0,
-                      );
-                      AppController.instance.addEquipeCard(equipe);
-                    });
-                  },
-                ),
-                visible: (listColors.isEmpty ? false : true),
               ),
             ],
           ),

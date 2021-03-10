@@ -5,8 +5,9 @@ var optionsButtonHome = {"port": "OPÇÕES", "eng": "OPTIONS"};
 var menuButtonHome = {"port": "MENU", "eng": "MENU"};
 
 //Menu Page
-var timerButtonMenu = {"port": "TEMPO: ", "eng": "TIMER: "};
-var teamButtonMenu = {"port": "EQUIPE: ", "eng": "TEAM: "};
+var timerButtonMenu = {"port": "TEMPO:", "eng": "TIMER:"};
+var teamButtonMenu = {"port": "EQUIPE:", "eng": "TEAM:"};
+var peopleButtonMenu = {"port": "PESSOAS:", "eng": "PEOPLE:"};
 var switchTimerVisible = {
   "port": "HABILITAR CRONOMETRO: ",
   "eng": "ABLE TIMER: "
