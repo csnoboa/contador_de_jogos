@@ -119,20 +119,6 @@ class AppController extends ChangeNotifier {
     ),
     PersonCard(
       name: "Person2",
-      equipe: "AZUL",
-      color: Colors.blue,
-      selected: false,
-      count: 0,
-    ),
-    PersonCard(
-      name: "Person3",
-      equipe: "AMARELO",
-      color: Colors.yellow,
-      selected: false,
-      count: 0,
-    ),
-    PersonCard(
-      name: "Person4",
       equipe: "AMARELO",
       color: Colors.yellow,
       selected: false,

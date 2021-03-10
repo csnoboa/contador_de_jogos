@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:contador_de_jogos/language/language.dart';
@@ -40,8 +41,31 @@ class _MenuPageState extends State<MenuPage> {
     Colors.red
   ];
 
+  var listColorsEquipes = {
+    "ROXO": Colors.purple,
+    "ROSA": Colors.pink,
+    "LARANJA": Colors.orange,
+    "CINZA": Colors.grey,
+    "MARROM": Colors.brown,
+    "PRETO": Colors.black,
+    "AZUL": Colors.blue,
+    "VERDE": Colors.green,
+    "AMARELO": Colors.yellow,
+    "VERMELHO": Colors.red,
+    "BRANCO": Colors.white,
+  };
+
   @override
   Widget build(BuildContext context) {
+    List<String> listColorsEquipesString = List.empty(growable: true);
+
+    for (int i = 0; i < AppController.instance.sizeListEquipeCard(); i++) {
+      listColorsEquipesString
+          .add(AppController.instance.listEquipeCard[i].name);
+    }
+    listColorsEquipesString.add("BRANCO");
+
+    // Add the cards to display the Equipe Cards
     List<Widget> listAddedWidgets = List.empty(growable: true);
 
     for (int i = 0; i < AppController.instance.sizeListEquipeCard(); i++) {
@@ -77,14 +101,29 @@ class _MenuPageState extends State<MenuPage> {
                   setState(() {
                     listNamesString
                         .add(AppController.instance.listEquipeCard[i].name);
+
                     listColors
                         .add(AppController.instance.listEquipeCard[i].color);
+
+                    for (int j = 0;
+                        j < AppController.instance.sizeListPersonCard();
+                        j++) {
+                      if (AppController.instance.listPersonCard[j].equipe ==
+                          AppController.instance.listEquipeCard[i].name) {
+                        AppController.instance.listPersonCard[j].equipe =
+                            "BRANCO";
+                        AppController.instance.listPersonCard[j].color =
+                            Colors.white;
+                      }
+                    }
+
+                    listColorsEquipesString
+                        .remove(AppController.instance.listEquipeCard[i].name);
+
                     AppController.instance.removeEquipeCard(i);
                   });
                 },
-                icon: Icon(
-                  Icons.remove_circle_outline,
-                ),
+                icon: Icon(Icons.remove_circle_outline),
               ),
             ],
           ),
@@ -92,9 +131,13 @@ class _MenuPageState extends State<MenuPage> {
       );
     }
 
+    // List to display the players
     List<Widget> listAddedPerson = List.empty(growable: true);
 
+    String dropdownValue = "BRANCO";
+
     for (int i = 0; i < AppController.instance.sizeListPersonCard(); i++) {
+      dropdownValue = AppController.instance.listPersonCard[i].equipe;
       listAddedPerson.add(
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -102,9 +145,30 @@ class _MenuPageState extends State<MenuPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 50,
-                height: 50,
-                color: AppController.instance.listPersonCard[i].color,
+                child: DropdownButton<String>(
+                  value: dropdownValue,
+                  elevation: 16,
+                  onChanged: (String newValue) {
+                    setState(() {
+                      dropdownValue = newValue;
+                      AppController.instance.listPersonCard[i].equipe =
+                          newValue;
+                      AppController.instance.listPersonCard[i].color =
+                          listColorsEquipes[newValue];
+                    });
+                  },
+                  items: listColorsEquipesString
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        color: listColorsEquipes[value],
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
               Container(width: 20),
               Container(
@@ -321,9 +385,12 @@ class _MenuPageState extends State<MenuPage> {
                                         "${AppController.instance.sizeListPersonCard() + 1}",
                                     color: AppController
                                             .instance.listEquipeCard[0].color ??
-                                        Colors.blue,
+                                        Colors.white,
                                     selected: false,
                                     count: 0,
+                                    equipe: AppController
+                                            .instance.listEquipeCard[0].name ??
+                                        "BRANCO",
                                   );
                                   AppController.instance.addPersonCard(equipe);
                                 });
@@ -332,6 +399,66 @@ class _MenuPageState extends State<MenuPage> {
                             visible:
                                 (AppController.instance.sizeListEquipeCard() >
                                     0),
+                          ),
+                          ElevatedButton(
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.grey),
+                            onPressed: () {
+                              setState(() {
+                                List<String> listSortable =
+                                    List.empty(growable: true);
+                                listSortable =
+                                    List.from(listColorsEquipesString);
+                                listSortable.remove("BRANCO");
+                                listSortable.shuffle();
+                                for (int i = 0;
+                                    i <
+                                        AppController.instance
+                                            .sizeListPersonCard();
+                                    i++) {
+                                  if (listSortable.isEmpty) {
+                                    listSortable =
+                                        List.from(listColorsEquipesString);
+                                    listSortable.remove("BRANCO");
+                                    listSortable.shuffle();
+                                  }
+                                  AppController.instance.listPersonCard[i]
+                                      .equipe = listSortable.removeLast();
+                                  AppController
+                                          .instance.listPersonCard[i].color =
+                                      listColorsEquipes[AppController
+                                          .instance.listPersonCard[i].equipe];
+                                }
+                                // for (int i = 0;
+                                //     i <
+                                //         AppController.instance
+                                //             .sizeListPersonCard();
+                                //     i++) {
+                                //   List listSortable = listColorsEquipesString;
+                                //   listSortable.remove("BRANCO");
+                                //   listSortable.shuffle();
+                                //   while (listSortable.isNotEmpty &&
+                                //       i <
+                                //           AppController.instance
+                                //               .sizeListPersonCard()) {
+                                //     AppController.instance.listPersonCard[i]
+                                //         .equipe = listSortable.removeLast();
+                                //     AppController
+                                //             .instance.listPersonCard[i].color =
+                                //         listColorsEquipes[AppController
+                                //             .instance.listPersonCard[i].equipe];
+                                //     i++;
+                                //   }
+                                // }
+                              });
+                            },
+                            child: Text(
+                              rearrangeButtonMenu[AppController.instance.lang],
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                              ),
+                            ),
                           ),
                           Container(height: 60),
                         ],

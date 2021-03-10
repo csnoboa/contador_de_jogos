@@ -12,6 +12,10 @@ var switchTimerVisible = {
   "port": "HABILITAR CRONOMETRO: ",
   "eng": "ABLE TIMER: "
 };
+var rearrangeButtonMenu = {
+  "port": "REARRANJAR EQUIPES",
+  "eng": "REARRANGE TEAMS"
+};
 
 //Options Page
 var titleOptionsPage = {"port": "OPÇÕES", "eng": "OPTIONS"};

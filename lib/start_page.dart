@@ -346,11 +346,11 @@ class _StartPageState extends State<StartPage> {
                             child: Column(children: listWidgets),
                           ),
                           Container(
-                              constraints: BoxConstraints(
-                                minWidth:
-                                    MediaQuery.of(context).size.width * 0.9,
-                              ),
-                              child: Column(children: listPersonWidget)),
+                            constraints: BoxConstraints(
+                              minWidth: MediaQuery.of(context).size.width * 0.9,
+                            ),
+                            child: Column(children: listPersonWidget),
+                          ),
                         ],
                       ),
                     ),
