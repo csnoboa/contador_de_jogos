@@ -17,11 +17,6 @@ class AppController extends ChangeNotifier {
 
   String lang = 'port';
 
-  List<EquipeCard> listEquipeCard = [
-    EquipeCard(name: "AZUL", color: Colors.blue),
-    EquipeCard(name: "AMARELO", color: Colors.yellow)
-  ];
-
   importFileConfig() {
     ConfigStorage().readConfig().then((Config value) {
       print(value);
@@ -84,6 +79,16 @@ class AppController extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<EquipeCard> listEquipeCard = [
+    EquipeCard(name: "AZUL", color: Colors.blue, selected: true, count: 0),
+    EquipeCard(name: "AMARELO", color: Colors.yellow, selected: false, count: 0)
+  ];
+
+  changeSelected(int index, bool newSelected) {
+    listEquipeCard[index].changeSelected(newSelected);
+    notifyListeners();
+  }
+
   void addEquipeCard(EquipeCard equipeCard) {
     listEquipeCard.add(equipeCard);
   }
@@ -95,10 +100,32 @@ class AppController extends ChangeNotifier {
   int sizeListCard() {
     return listEquipeCard.length;
   }
+
+  increaseCount(int index) {
+    listEquipeCard[index].increaseCount();
+  }
+
+  decreaseCount(int index) {
+    listEquipeCard[index].decreaseCount();
+  }
 }
 
 class EquipeCard {
-  EquipeCard({this.name, this.color});
+  EquipeCard({this.name, this.color, this.selected, this.count});
   var name;
   Color color;
+  bool selected;
+  int count;
+
+  increaseCount() {
+    count++;
+  }
+
+  decreaseCount() {
+    count--;
+  }
+
+  changeSelected(bool newSelected) {
+    selected = newSelected;
+  }
 }

@@ -53,6 +53,10 @@ class _StartPageState extends State<StartPage> {
     player.setPlaybackRate(playbackRate: 2);
   }
 
+  void refresh() {
+    setState(() {});
+  }
+
   void _startTimer() {
     if (_timer != null) {
       _timer.cancel();
@@ -188,23 +192,16 @@ class _StartPageState extends State<StartPage> {
     List<EquipeCardGame> listWidgets = List.empty(growable: true);
 
     for (int i = 0; i < AppController.instance.sizeListCard(); i++) {
-      if (i == 0) {
-        listWidgets.add(
-          EquipeCardGame(
-            colorEquipe: AppController.instance.listEquipeCard[i].color,
-            nameEquipe: AppController.instance.listEquipeCard[i].name,
-            arrowSelected: true,
-          ),
-        );
-      } else {
-        listWidgets.add(
-          EquipeCardGame(
-            colorEquipe: AppController.instance.listEquipeCard[i].color,
-            nameEquipe: AppController.instance.listEquipeCard[i].name,
-            arrowSelected: false,
-          ),
-        );
-      }
+      listWidgets.add(
+        EquipeCardGame(
+          colorEquipe: AppController.instance.listEquipeCard[i].color,
+          nameEquipe: AppController.instance.listEquipeCard[i].name,
+          arrowSelected: AppController.instance.listEquipeCard[i].selected,
+          count: AppController.instance.listEquipeCard[i].count,
+          index: i,
+          notifyParent: refresh,
+        ),
+      );
     }
 
     return Container(
@@ -238,10 +235,11 @@ class _StartPageState extends State<StartPage> {
                           setState(() {
                             int newSelected = Random()
                                 .nextInt(AppController.instance.sizeListCard());
-                            // listKey[newSelected].currentState.setState(() {
-                            // widget.arrowSelected = true;
-                            // });
-                            // listWidgets[selected].arrowSelected = false;
+
+                            AppController.instance
+                                .changeSelected(selected, false);
+                            AppController.instance
+                                .changeSelected(newSelected, true);
 
                             selected = newSelected;
                             print(newSelected);

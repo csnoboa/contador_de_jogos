@@ -232,6 +232,8 @@ class _MenuPageState extends State<MenuPage> {
                       EquipeCard equipe = EquipeCard(
                         name: listNamesString.removeLast(),
                         color: listColors.removeLast(),
+                        selected: false,
+                        count: 0,
                       );
                       AppController.instance.addEquipeCard(equipe);
                     });

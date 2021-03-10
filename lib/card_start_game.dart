@@ -1,48 +1,48 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
+import 'package:contador_de_jogos/start_page.dart';
 
-class EquipeCardGame extends StatefulWidget {
+// class EquipeCardGame extends StatefulWidget {
+//   EquipeCardGame(
+//       {Key key, this.colorEquipe, this.nameEquipe, this.arrowSelected})
+//       : super(key: key);
+
+//   final Color colorEquipe;
+//   final String nameEquipe;
+//   final bool arrowSelected;
+
+//   @override
+//   _EquipeCardGameState createState() => _EquipeCardGameState(
+//       colorEquipe: this.colorEquipe,
+//       nameEquipe: this.nameEquipe,
+//       arrowSelected: this.arrowSelected);
+// }
+
+class EquipeCardGame extends StatelessWidget {
   EquipeCardGame(
-      {Key key, this.colorEquipe, this.nameEquipe, this.arrowSelected})
-      : super(key: key);
+      {this.colorEquipe,
+      this.nameEquipe,
+      this.arrowSelected,
+      this.index,
+      this.count,
+      this.notifyParent});
 
+  final Function() notifyParent;
   final Color colorEquipe;
   final String nameEquipe;
   final bool arrowSelected;
-
-  @override
-  _EquipeCardGameState createState() => _EquipeCardGameState(
-      colorEquipe: this.colorEquipe,
-      nameEquipe: this.nameEquipe,
-      arrowSelected: this.arrowSelected);
-}
-
-class _EquipeCardGameState extends State<EquipeCardGame> {
-  _EquipeCardGameState({
-    this.colorEquipe,
-    this.nameEquipe,
-    this.arrowSelected,
-  });
-
-  Color colorEquipe;
-  String nameEquipe;
-  bool arrowSelected;
-
-  int _count = 0;
+  final index;
+  final int count;
 
   void increaseCount() {
-    _count++;
+    AppController.instance.increaseCount(index);
+    notifyParent();
   }
 
   void decreaseCount() {
-    _count--;
-  }
-
-  void changeArrowSelected() {
-    setState(() {
-      arrowSelected = !arrowSelected;
-    });
+    AppController.instance.decreaseCount(index);
+    notifyParent();
   }
 
   @override
@@ -80,14 +80,12 @@ class _EquipeCardGameState extends State<EquipeCardGame> {
                   color: Colors.black,
                 ),
                 onPressed: () {
-                  setState(() {
-                    decreaseCount();
-                  });
+                  decreaseCount();
                 },
               ),
               Container(width: 5),
               Text(
-                '$_count',
+                '$count',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -101,9 +99,7 @@ class _EquipeCardGameState extends State<EquipeCardGame> {
                   color: Colors.black,
                 ),
                 onPressed: () {
-                  setState(() {
-                    increaseCount();
-                  });
+                  increaseCount();
                 },
               ),
             ],
