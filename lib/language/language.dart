@@ -32,7 +32,7 @@ var minutesStart = {"port": " MINUTOS", "eng": " MINUTES"};
 var secondStart = {"port": " SEGUNDO", "eng": " SECOND"};
 var secondsStart = {"port": " SEGUNDOS", "eng": " SECONDS"};
 var sortButtonStart = {"port": "SORTEAR", "eng": "SORT"};
-var resetButtonStart = {"port": "RESETAR PONTUAÇÕES", "eng": "RESET SCORES"};
+var resetButtonStart = {"port": "RESETAR", "eng": "RESET"};
 
 var matchStart = {"port": "PARTIDA", "eng": "MATCH"};
 
