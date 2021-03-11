@@ -111,14 +111,14 @@ class AppController extends ChangeNotifier {
 
   List<PersonCard> listPersonCard = [
     PersonCard(
-      name: "Person1",
+      name: "1",
       equipe: "AZUL",
       color: Colors.blue,
       selected: true,
       count: 0,
     ),
     PersonCard(
-      name: "Person2",
+      name: "2",
       equipe: "AMARELO",
       color: Colors.yellow,
       selected: false,

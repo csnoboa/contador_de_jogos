@@ -1,4 +1,5 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
+import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
 
 class PersonCardWidget extends StatelessWidget {
@@ -48,7 +49,7 @@ class PersonCardWidget extends StatelessWidget {
                   minWidth: MediaQuery.of(context).size.width * 0.3,
                 ),
                 child: Text(
-                  namePerson,
+                  playerName[AppController.instance.lang] + namePerson,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

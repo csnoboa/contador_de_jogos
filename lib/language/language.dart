@@ -36,6 +36,8 @@ var resetButtonStart = {"port": "RESETAR", "eng": "RESET"};
 
 var matchStart = {"port": "PARTIDA", "eng": "MATCH"};
 
+var playerName = {"port": "JOGADOR ", "eng": "PLAYER "};
+
 var listNames = {
   "ROXO": "PURPLE",
   "ROSA": "PINK",

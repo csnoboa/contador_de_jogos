@@ -176,7 +176,8 @@ class _MenuPageState extends State<MenuPage> {
                   minWidth: MediaQuery.of(context).size.width * 0.35,
                 ),
                 child: Text(
-                  AppController.instance.listPersonCard[i].name,
+                  playerName[AppController.instance.lang] +
+                      AppController.instance.listPersonCard[i].name,
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -381,7 +382,7 @@ class _MenuPageState extends State<MenuPage> {
                               onPressed: () {
                                 setState(() {
                                   PersonCard equipe = PersonCard(
-                                    name: "Player" +
+                                    name:
                                         "${AppController.instance.sizeListPersonCard() + 1}",
                                     color: AppController
                                             .instance.listEquipeCard[0].color ??
@@ -429,27 +430,6 @@ class _MenuPageState extends State<MenuPage> {
                                       listColorsEquipes[AppController
                                           .instance.listPersonCard[i].equipe];
                                 }
-                                // for (int i = 0;
-                                //     i <
-                                //         AppController.instance
-                                //             .sizeListPersonCard();
-                                //     i++) {
-                                //   List listSortable = listColorsEquipesString;
-                                //   listSortable.remove("BRANCO");
-                                //   listSortable.shuffle();
-                                //   while (listSortable.isNotEmpty &&
-                                //       i <
-                                //           AppController.instance
-                                //               .sizeListPersonCard()) {
-                                //     AppController.instance.listPersonCard[i]
-                                //         .equipe = listSortable.removeLast();
-                                //     AppController
-                                //             .instance.listPersonCard[i].color =
-                                //         listColorsEquipes[AppController
-                                //             .instance.listPersonCard[i].equipe];
-                                //     i++;
-                                //   }
-                                // }
                               });
                             },
                             child: Text(
