@@ -376,30 +376,31 @@ class _MenuPageState extends State<MenuPage> {
                           Column(
                             children: listAddedPerson,
                           ),
-                          Visibility(
-                            child: IconButton(
-                              icon: Icon(Icons.add),
-                              onPressed: () {
-                                setState(() {
-                                  PersonCard equipe = PersonCard(
-                                    name:
-                                        "${AppController.instance.sizeListPersonCard() + 1}",
-                                    color: AppController
-                                            .instance.listEquipeCard[0].color ??
-                                        Colors.white,
-                                    selected: false,
-                                    count: 0,
-                                    equipe: AppController
-                                            .instance.listEquipeCard[0].name ??
-                                        "BRANCO",
-                                  );
-                                  AppController.instance.addPersonCard(equipe);
-                                });
-                              },
-                            ),
-                            visible:
-                                (AppController.instance.sizeListEquipeCard() >
-                                    0),
+                          IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+                              setState(() {
+                                PersonCard person = PersonCard(
+                                  name:
+                                      "${AppController.instance.sizeListPersonCard() + 1}",
+                                  color: AppController.instance
+                                              .sizeListEquipeCard() >
+                                          0
+                                      ? AppController
+                                          .instance.listEquipeCard[0].color
+                                      : Colors.white,
+                                  selected: false,
+                                  count: 0,
+                                  equipe: AppController.instance
+                                              .sizeListEquipeCard() >
+                                          0
+                                      ? AppController
+                                          .instance.listEquipeCard[0].name
+                                      : "BRANCO",
+                                );
+                                AppController.instance.addPersonCard(person);
+                              });
+                            },
                           ),
                           ElevatedButton(
                             style:

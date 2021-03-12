@@ -408,6 +408,27 @@ class _StartPageState extends State<StartPage> {
                         ],
                       ),
                     ),
+                    Container(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.grey,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/finish');
+                          },
+                          child: Text(
+                            finishGame[AppController.instance.lang],
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),

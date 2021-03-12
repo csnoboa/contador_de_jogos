@@ -1,4 +1,5 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
+import 'package:contador_de_jogos/finish_page.dart';
 import 'package:contador_de_jogos/home_page.dart';
 import 'package:contador_de_jogos/menu_page.dart';
 import 'package:contador_de_jogos/options_page.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
             '/start': (context) => StartPage(),
             '/options': (context) => OptionsPage(),
             '/menu': (context) => MenuPage(),
+            '/finish': (context) => FinishPage(),
           },
           initialRoute: '/',
           theme: ThemeData(
