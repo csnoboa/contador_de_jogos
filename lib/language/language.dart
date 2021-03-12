@@ -31,10 +31,19 @@ var minuteStart = {"port": " MINUTO", "eng": " MINUTE"};
 var minutesStart = {"port": " MINUTOS", "eng": " MINUTES"};
 var secondStart = {"port": " SEGUNDO", "eng": " SECOND"};
 var secondsStart = {"port": " SEGUNDOS", "eng": " SECONDS"};
+
 var sortButtonStart = {"port": "SORTEAR", "eng": "SORT"};
 var resetButtonStart = {"port": "RESETAR", "eng": "RESET"};
 
 var matchStart = {"port": "PARTIDA", "eng": "MATCH"};
+var finishGame = {"port": "TERMINAR PARTIDA", "eng": "FINISH MATCH"};
+
+//Finish Page
+var finishPage = {"port": "FIM DA PARTIDA", "eng": "END OF THE MATCH"};
+var teamWinners = {"port": "EQUIPES GANHADORAS", "eng": "WINNING TEAMS"};
+var playerWinners = {"port": "PESSOAS GANHADORAS", "eng": "WINNING PLAYERS"};
+var newGame = {"port": "NOVA PARTIDA", "eng": "NEW MATCH"};
+var points = {"port": "PONTOS", "eng": "POINTS"};
 
 var playerName = {"port": "JOGADOR ", "eng": "PLAYER "};
 
