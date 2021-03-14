@@ -150,6 +150,20 @@ class AppController extends ChangeNotifier {
   decreasePersonCount(int index) {
     listPersonCard[index].decreaseCount();
   }
+
+  List<String> listColorsEquipesString = List.empty(growable: true);
+
+  listColorsEquipesStringAdd(String newColor) {
+    if (!listColorsEquipesString.contains(newColor)) {
+      listColorsEquipesString.add(newColor);
+      notifyListeners();
+    }
+  }
+
+  listColorsEquipesStringRemove(String color) {
+    listColorsEquipesString.remove(color);
+    notifyListeners();
+  }
 }
 
 class PersonCard {

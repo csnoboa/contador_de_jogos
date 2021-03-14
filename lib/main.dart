@@ -1,10 +1,10 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
-import 'package:contador_de_jogos/finish_page.dart';
-import 'package:contador_de_jogos/home_page.dart';
-import 'package:contador_de_jogos/menu_page.dart';
-import 'package:contador_de_jogos/options_page.dart';
+import 'package:contador_de_jogos/pages/finish_page/finish_page.dart';
+import 'package:contador_de_jogos/pages/home_page/home_page.dart';
+import 'package:contador_de_jogos/pages/menu_page/menu_page.dart';
+import 'package:contador_de_jogos/pages/options_page/options_page.dart';
 import 'package:flutter/material.dart';
-import 'package:contador_de_jogos/start_page.dart';
+import 'package:contador_de_jogos/pages/start_page/start_page.dart';
 
 void main() {
   runApp(MyApp());
