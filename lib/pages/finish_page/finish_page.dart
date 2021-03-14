@@ -38,6 +38,7 @@ class _FinishPageState extends State<FinishPage> {
               child: Column(
                 children: [
                   SingleChildScrollView(
+                    controller: AppController.instance.scrollController,
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [

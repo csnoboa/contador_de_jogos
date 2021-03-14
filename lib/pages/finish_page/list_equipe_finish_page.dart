@@ -56,12 +56,29 @@ class _ListEquipeFinishPageState extends State<ListEquipeFinishPage> {
       );
     }
 
-    return Container(
-      constraints:
-          BoxConstraints(minWidth: MediaQuery.of(context).size.width * 0.9),
-      child: Column(
-        children: listEquipesWidget,
-      ),
+    return Column(
+      children: [
+        Container(
+          constraints: BoxConstraints(
+              minWidth: MediaQuery.of(context).size.width * 0.95),
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: IconButton(
+              icon: Icon(Icons.arrow_forward),
+              onPressed: () {
+                setState(() {
+                  AppController.instance.scrollController
+                      .jumpTo(MediaQuery.of(context).size.width * 0.95);
+                  // widget.notifyParent();
+                });
+              },
+            ),
+          ),
+        ),
+        Column(
+          children: listEquipesWidget,
+        ),
+      ],
     );
   }
 }
