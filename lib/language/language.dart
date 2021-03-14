@@ -1,4 +1,6 @@
 //Home Page
+import 'package:flutter/material.dart';
+
 var titleHomeLang = {"port": "CONTADOR DE JOGOS", "eng": "GAME COUNTER"};
 var startButtonHome = {"port": "COMEÇAR", "eng": "START"};
 var optionsButtonHome = {"port": "OPÇÕES", "eng": "OPTIONS"};
@@ -47,6 +49,7 @@ var points = {"port": "PONTOS", "eng": "POINTS"};
 
 var playerName = {"port": "JOGADOR ", "eng": "PLAYER "};
 
+// Dictionary to translate the String color in Portuguese to the name Color in English
 var listNames = {
   "ROXO": "PURPLE",
   "ROSA": "PINK",
@@ -58,4 +61,19 @@ var listNames = {
   "VERDE": "GREEN",
   "AMARELO": "YELLOW",
   "VERMELHO": "RED",
+};
+
+// Dictionary to translate the String color to the respectively Color
+var listColorsEquipes = {
+  "ROXO": Colors.purple,
+  "ROSA": Colors.pink,
+  "LARANJA": Colors.orange,
+  "CINZA": Colors.grey,
+  "MARROM": Colors.brown,
+  "PRETO": Colors.black,
+  "AZUL": Colors.blue,
+  "VERDE": Colors.green,
+  "AMARELO": Colors.yellow,
+  "VERMELHO": Colors.red,
+  "BRANCO": Colors.white,
 };

@@ -1,7 +1,7 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
 import 'package:contador_de_jogos/finish_page.dart';
 import 'package:contador_de_jogos/home_page.dart';
-import 'package:contador_de_jogos/menu_page.dart';
+import 'package:contador_de_jogos/pages/menu_page/menu_page.dart';
 import 'package:contador_de_jogos/options_page.dart';
 import 'package:flutter/material.dart';
 import 'package:contador_de_jogos/start_page.dart';
