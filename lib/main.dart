@@ -1,5 +1,5 @@
 import 'package:contador_de_jogos/controller/app_controller.dart';
-import 'package:contador_de_jogos/finish_page.dart';
+import 'package:contador_de_jogos/pages/finish_page/finish_page.dart';
 import 'package:contador_de_jogos/pages/home_page/home_page.dart';
 import 'package:contador_de_jogos/pages/menu_page/menu_page.dart';
 import 'package:contador_de_jogos/pages/options_page/options_page.dart';

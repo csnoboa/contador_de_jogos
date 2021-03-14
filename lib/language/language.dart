@@ -45,7 +45,7 @@ var finishPage = {"port": "FIM DA PARTIDA", "eng": "END OF THE MATCH"};
 var teamWinners = {"port": "EQUIPES GANHADORAS", "eng": "WINNING TEAMS"};
 var playerWinners = {"port": "PESSOAS GANHADORAS", "eng": "WINNING PLAYERS"};
 var newGame = {"port": "NOVA PARTIDA", "eng": "NEW MATCH"};
-var points = {"port": "PONTOS", "eng": "POINTS"};
+var points = {"port": " PONTOS", "eng": " POINTS"};
 
 var playerName = {"port": "JOGADOR ", "eng": "PLAYER "};
 
