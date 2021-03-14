@@ -33,12 +33,13 @@ class _MenuPageState extends State<MenuPage> {
             children: [
               TimerMenuPage(),
               SingleChildScrollView(
+                controller: AppController.instance.scrollController,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListEquipeMenuPage(notifyParent: refresh),
-                    ListPersonMenuPage(),
+                    ListPersonMenuPage(notifyParent: refresh),
                   ],
                 ),
               ),

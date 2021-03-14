@@ -3,7 +3,9 @@ import 'package:contador_de_jogos/language/language.dart';
 import 'package:flutter/material.dart';
 
 class ListPersonMenuPage extends StatefulWidget {
-  ListPersonMenuPage({Key key}) : super(key: key);
+  ListPersonMenuPage({Key key, @required this.notifyParent}) : super(key: key);
+
+  final Function() notifyParent;
 
   @override
   _ListPersonMenuPageState createState() => _ListPersonMenuPageState();
@@ -79,8 +81,7 @@ class _ListPersonMenuPageState extends State<ListPersonMenuPage> {
     }
 
     return Container(
-      constraints:
-          BoxConstraints(minWidth: MediaQuery.of(context).size.width * 1),
+      width: MediaQuery.of(context).size.width * 1,
       child: Column(
         children: [
           Padding(
@@ -88,6 +89,22 @@ class _ListPersonMenuPageState extends State<ListPersonMenuPage> {
             child: Text(
               peopleButtonMenu[AppController.instance.lang],
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+            constraints:
+                BoxConstraints(minWidth: MediaQuery.of(context).size.width * 1),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  setState(() {
+                    AppController.instance.scrollController.jumpTo(0);
+                    widget.notifyParent();
+                  });
+                },
+              ),
             ),
           ),
           Column(children: listAddedPerson),

@@ -151,7 +151,8 @@ class AppController extends ChangeNotifier {
     listPersonCard[index].decreaseCount();
   }
 
-  List<String> listColorsEquipesString = List.empty(growable: true);
+  // List<String> listColorsEquipesString = List.empty(growable: true);
+  List<String> listColorsEquipesString = ["AZUL", "AMARELO", "BRANCO"];
 
   listColorsEquipesStringAdd(String newColor) {
     if (!listColorsEquipesString.contains(newColor)) {
@@ -164,6 +165,8 @@ class AppController extends ChangeNotifier {
     listColorsEquipesString.remove(color);
     notifyListeners();
   }
+
+  ScrollController scrollController = ScrollController();
 }
 
 class PersonCard {
