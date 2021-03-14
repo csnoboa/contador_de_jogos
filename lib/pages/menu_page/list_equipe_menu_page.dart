@@ -40,12 +40,6 @@ class _ListEquipeMenuPageState extends State<ListEquipeMenuPage> {
 
   @override
   Widget build(BuildContext context) {
-    for (int i = 0; i < AppController.instance.sizeListEquipeCard(); i++) {
-      AppController.instance.listColorsEquipesStringAdd(
-          AppController.instance.listEquipeCard[i].name);
-    }
-    AppController.instance.listColorsEquipesStringAdd("BRANCO");
-
     // Add the cards to display the Equipe Cards
     List<Widget> listAddedWidgets = List.empty(growable: true);
 
@@ -131,13 +125,15 @@ class _ListEquipeMenuPageState extends State<ListEquipeMenuPage> {
               icon: Icon(Icons.add),
               onPressed: () {
                 setState(() {
+                  String nameAux = listNamesString.removeLast();
                   EquipeCard equipe = EquipeCard(
-                    name: listNamesString.removeLast(),
+                    name: nameAux,
                     color: listColors.removeLast(),
                     selected: false,
                     count: 0,
                   );
                   AppController.instance.addEquipeCard(equipe);
+                  AppController.instance.listColorsEquipesStringAdd(nameAux);
                   widget.notifyParent();
                 });
               },
