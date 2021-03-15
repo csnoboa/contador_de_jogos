@@ -1,16 +1,25 @@
-# contador_de_jogos
+Utility for Games
 
-A new Flutter project.
+An app with utilities to board or card games:
+- Count the punctuation of each player or team. 
+- Choose the team. 
+- Timer.
+- Roll a dice. (in construction)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+Go to Options Page to choose the language, disable sound/alarm and choose the theme:
+![](images/go_to_options.png)
 
-A few resources to get you started if this is your first Flutter project:
+Go to Menu Page:
+![](images/go_to_menu.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+On this page, you can add more teams and players, associate each player to a team or to the neutral team (white). You can sort the players associated with the teams.
+You can also disable or adjust the timer
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Start the game:
+![](images/start_game.png)
+
+Timer: You can initiate the timer, pause, restart. 
+Points: You can add or sub-points to each player or team, you can reset the points and you can sort one team or one player (randomly to decide who is gonna start first, for example).
+
+You can finalize the game and see who wins!
