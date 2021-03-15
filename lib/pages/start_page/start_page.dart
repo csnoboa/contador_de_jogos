@@ -168,20 +168,71 @@ class _StartPageState extends State<StartPage> {
                     Container(height: 20),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
+                      controller: AppController.instance.scrollController,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            constraints: BoxConstraints(
-                              minWidth: MediaQuery.of(context).size.width * 0.9,
+                            child: Column(
+                              children: [
+                                Container(
+                                  constraints: BoxConstraints(
+                                      minWidth:
+                                          MediaQuery.of(context).size.width *
+                                              0.9),
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: IconButton(
+                                      icon: Icon(Icons.arrow_forward),
+                                      onPressed: () {
+                                        setState(
+                                          () {
+                                            AppController
+                                                .instance.scrollController
+                                                .jumpTo(MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.9);
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Column(children: listWidgets),
+                              ],
                             ),
-                            child: Column(children: listWidgets),
                           ),
                           Container(
                             constraints: BoxConstraints(
                               minWidth: MediaQuery.of(context).size.width * 0.9,
                             ),
-                            child: Column(children: listPersonWidget),
+                            child: Column(
+                              children: [
+                                Container(
+                                  constraints: BoxConstraints(
+                                      minWidth:
+                                          MediaQuery.of(context).size.width *
+                                              0.9),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: IconButton(
+                                      icon: Icon(Icons.arrow_back),
+                                      onPressed: () {
+                                        setState(
+                                          () {
+                                            AppController
+                                                .instance.scrollController
+                                                .jumpTo(0);
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Column(children: listPersonWidget),
+                              ],
+                            ),
                           ),
                         ],
                       ),

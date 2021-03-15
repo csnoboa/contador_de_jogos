@@ -108,8 +108,7 @@ class _ListEquipeMenuPageState extends State<ListEquipeMenuPage> {
     }
 
     return Container(
-      constraints:
-          BoxConstraints(minWidth: MediaQuery.of(context).size.width * 1),
+      width: MediaQuery.of(context).size.width * 1,
       child: Column(
         children: [
           Padding(
@@ -117,6 +116,23 @@ class _ListEquipeMenuPageState extends State<ListEquipeMenuPage> {
             child: Text(
               teamButtonMenu[AppController.instance.lang],
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+            constraints:
+                BoxConstraints(minWidth: MediaQuery.of(context).size.width * 1),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                icon: Icon(Icons.arrow_forward),
+                onPressed: () {
+                  setState(() {
+                    AppController.instance.scrollController
+                        .jumpTo(MediaQuery.of(context).size.width);
+                    widget.notifyParent();
+                  });
+                },
+              ),
             ),
           ),
           Column(children: listAddedWidgets),

@@ -57,12 +57,28 @@ class _ListPersonFinishPageState extends State<ListPersonFinishPage> {
       );
     }
 
-    return Container(
-      constraints:
-          BoxConstraints(minWidth: MediaQuery.of(context).size.width * 0.9),
-      child: Column(
-        children: listPersonWidget,
-      ),
+    return Column(
+      children: [
+        Container(
+          constraints: BoxConstraints(
+              minWidth: MediaQuery.of(context).size.width * 0.95),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                setState(() {
+                  AppController.instance.scrollController.jumpTo(0);
+                  // widget.notifyParent();
+                });
+              },
+            ),
+          ),
+        ),
+        Column(
+          children: listPersonWidget,
+        ),
+      ],
     );
   }
 }
